@@ -127,7 +127,7 @@ function LoginPage() {
                           />
                     <Grid container>
                         <Grid item xs>
-                            <Link href="#" variant="body2"> Forgot Password?
+                            <Link href="/home" variant="body2"> Forgot Password?
                         </Link>
                         </Grid>
                         <Grid item>

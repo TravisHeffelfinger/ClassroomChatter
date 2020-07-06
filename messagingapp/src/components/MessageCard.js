@@ -1,9 +1,9 @@
 import React from 'react'
 
-const MessageBox = () => {
+const MessageCard = () => {
     return (
         <div>MessageBox</div>
     )
 }
 
-export default MessageBox
+export default MessageCard

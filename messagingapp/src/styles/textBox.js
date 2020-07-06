@@ -1,11 +1,18 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
+import Container from '@material-ui/core/Container';
+import Paper from '@material-ui/core/Paper';
 
 const useStyles = makeStyles((theme) => ({
   root: {
     display: 'flex',
     flexWrap: 'wrap',
+    // '& > *': {
+     margin: theme.spacing(2),
+    //   width: theme.spacing(16),
+    //   height: theme.spacing(16),
+    // }
   },
   textField: {
     marginLeft: theme.spacing(1),
@@ -19,27 +26,25 @@ export default function TextFields() {
 
   return (
     <div className={classes.root}>
-      <div>
-        
-      </div>
-      <div>
-        
-      </div>
-      <div>
-        <TextField
-          id="outlined-full-width"
-          label="Label"
-          style={{ margin: 8 }}
-          placeholder="Placeholder"
-          helperText="Full width!"
-          fullWidth
-          margin="normal"
-          InputLabelProps={{
-            shrink: true,
-          }}
-          variant="outlined"
-        />
-      </div>
+      <Container maxWidth='lg'>
+
+        <Paper elevation={1}>
+          <TextField
+            id="outlined-full-width"
+            label="Label"
+            style={{ margin: 8 }}
+            placeholder="Placeholder"
+            helperText="Full width!"
+            fullWidth
+            multiline
+            margin="normal"
+            InputLabelProps={{
+              shrink: true,
+            }}
+            variant="outlined"
+          />
+        </Paper>
+      </Container>
     </div>
   );
 }

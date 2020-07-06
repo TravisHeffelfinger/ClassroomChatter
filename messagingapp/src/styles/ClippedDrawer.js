@@ -18,6 +18,9 @@ import Typography from '@material-ui/core/Typography';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
 
 import TextFields from './textBox'
+import MessageCard from '../components/MessageCard'
+import PaperMessageBox from './PaperMessageBox'
+import MessageTextArea from '../components/MessageTextArea';
 
 const drawerWidth = 240;
 
@@ -142,10 +145,12 @@ function ResponsiveDrawer(props) {
       </nav>
       <main className={classes.content}>
         <div className={classes.toolbar} />
+        <PaperMessageBox />
         <TextFields />
         <TextFields />
         <TextFields />
         <TextFields />
+        <MessageTextArea />
       </main>
     </div>
   );
