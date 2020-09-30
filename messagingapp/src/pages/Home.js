@@ -1,12 +1,27 @@
 import React from 'react'
-import ClippedDrawer from '../styles/ClippedDrawer'
+import ChannelDisplay from '../components/ChannelDisplay'
+import MessageCard from '../components/MessageCard'
+
 
 class Home extends React.Component {
+
+    state={
+        messages: []
+    }
 
     render() {
         return (
             <div>
-                <ClippedDrawer />
+                <div className="channelArea">
+                    <ChannelDisplay />
+                </div>
+                <div className="messageArea">
+                    <MessageCard />
+                </div>
+                <div className="profile">
+
+                </div>
+                
             </div>
         )
     }

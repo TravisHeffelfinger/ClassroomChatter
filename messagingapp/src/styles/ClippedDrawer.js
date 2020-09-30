@@ -18,7 +18,6 @@ import Typography from '@material-ui/core/Typography';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
 
 import TextFields from './textBox'
-import MessageCard from '../components/MessageCard'
 import PaperMessageBox from './PaperMessageBox'
 import MessageTextArea from '../components/MessageTextArea';
 
@@ -62,6 +61,8 @@ function ResponsiveDrawer(props) {
   const classes = useStyles();
   const theme = useTheme();
   const [mobileOpen, setMobileOpen] = React.useState(false);
+
+
 
   const handleDrawerToggle = () => {
     setMobileOpen(!mobileOpen);

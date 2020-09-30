@@ -2,7 +2,7 @@ import { firebased } from '../services/firebase'
 
 export function signUpWithEmail(email, password) {
     return firebased.auth().createUserWithEmailAndPassword(email, password).catch(error => {
-        console.log('Sign up with email failed')
+        console.log('Sign up with email failed' ,error)
     })
 }
 
