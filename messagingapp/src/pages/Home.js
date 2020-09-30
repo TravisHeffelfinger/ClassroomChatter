@@ -11,14 +11,14 @@ class Home extends React.Component {
 
     render() {
         return (
-            <div>
-                <div className="channelArea">
+            <div className="home-container">
+                <div className="channel-container">
                     <ChannelDisplay />
                 </div>
-                <div className="messageArea">
+                <div className="message-container">
                     <MessageCard />
                 </div>
-                <div className="profile">
+                <div className="profile-container">
 
                 </div>
                 

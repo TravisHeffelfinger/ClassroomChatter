@@ -6,11 +6,12 @@ import Home from '../pages/Home'
 import LandingPage from '../pages/LandingPage'
 import { firebased } from '../services/firebase'
 import SignUpPage from '../pages/SignUpPage'
+import NavBar from './NavBar'
 
 class App extends React.Component {
 
     state = {
-        authenticated: false
+        authenticated: true
     }
     
     checkAuth = () => {
@@ -28,12 +29,11 @@ class App extends React.Component {
         
         return (
             <Router>
-                <div>
+                <div className="app-container">
+                <NavBar />
                     <Switch>
                         <Route exact path='/'>
-                            <Route path="/profile" component={Home}/>
-                            {this.state.authenticated ? <Route path='/home' component={Home}/>: <Redirect to='/login' />}
-                            
+                            {this.state.authenticated ? <Route path='/home' component={Home}/>: <Redirect to='/login' />}  
                         </Route>
                         <Route path='/login' component={LandingPage} />
                         <Route path='/signup' component={SignUpPage}/>
