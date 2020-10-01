@@ -1,6 +1,7 @@
-import { db } from '../services/firebase'
+import { db, firebased } from '../services/firebase'
+import firebase from 'firebase'
 
-export function addMessage(message) {
+export function addMessageOld(message) { // TODO: review this function when Redux is implemented
     return db.collection('messages').add({
         text: message.text,
         userId: message.userId,
@@ -40,4 +41,32 @@ export function getChannels() {
         db.collection('channels').get().then(query => resolve(query))
     })
     return channelsPromise
+}
+
+export  function getChannel(channelName) {
+    const channelsPromise = new Promise((resolve, reject) => {
+    db.collection('channels')
+        .where("name", "==", channelName)
+        .get()
+        .then(query => {
+            resolve(query)
+        })
+        .catch(error => {
+            reject(error);
+        })
+    })
+    return channelsPromise
+}
+
+export function updateChannelMessages(messageObject, channelRef) {
+    db.collection('channels')
+    .doc(channelRef.id)
+    .update({messages: firebase.firestore.FieldValue.arrayUnion(messageObject)})
+    
+    .then(() => {
+        console.log('new message created');
+    })
+    .catch(error => {
+        console.log('failure', error);
+    })
 }

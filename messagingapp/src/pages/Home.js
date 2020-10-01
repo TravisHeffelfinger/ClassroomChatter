@@ -1,12 +1,14 @@
 import React from 'react'
 import ChannelDisplay from '../components/ChannelDisplay'
 import MessageCard from '../components/MessageCard'
+import MessageTextArea from '../components/MessageTextArea'
+import Profile from './Profile'
 
 
 class Home extends React.Component {
 
     state={
-        messages: []
+        selectedChannel: 'potato'
     }
 
     render() {
@@ -17,11 +19,16 @@ class Home extends React.Component {
                 </div>
                 <div className="message-container">
                     <MessageCard />
+                    <MessageCard />
+                    <MessageCard />
+                    <MessageCard />
+                    <MessageCard />
+                    <MessageCard />
+                    <MessageTextArea selectedChannel={ this.state.selectedChannel } />
                 </div>
                 <div className="profile-container">
-
+                    <Profile />
                 </div>
-                
             </div>
         )
     }

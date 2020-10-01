@@ -54,7 +54,9 @@ body {
 .home-container,
 .app-container,
 .message-card,
-.message-title {
+.message-title,
+.channel-display,
+.message-input-box {
   border: 1px solid red;
 }
 
@@ -91,4 +93,43 @@ body {
 .like-button {
     margin-right: 2%;
     cursor: pointer;
+}
+
+.channel-select-button {
+    font-size: x-large;
+    text-align: center;
+    padding: 3%;
+}
+
+.profile-name {
+    text-align: center;
+    margin: 5%;
+    font-size: 20pt;
+}
+
+.profile-image{
+    height: 200px;
+    width: 200px;
+    border: 1px solid green;
+    margin: auto;
+    border-radius: 50%;
+}
+
+.profile-field-name {
+    text-align: center;
+    font-size: 16pt;
+    margin: 3% 0;
+    border-bottom: 1px solid grey;
+}
+
+.profile-field-value {
+    text-align: center;
+}
+
+.message-input-box {
+    position: fixed;
+    background-color: grey;
+    bottom: 0;
+    height: 10%;
+    width: 39.8%;
 }

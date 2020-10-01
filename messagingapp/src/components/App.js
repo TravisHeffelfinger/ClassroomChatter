@@ -13,6 +13,10 @@ class App extends React.Component {
     state = {
         authenticated: true
     }
+
+    componentDidMount() {
+        this.checkAuth();
+    }
     
     checkAuth = () => {
         firebased.auth().onAuthStateChanged((user) =>  {

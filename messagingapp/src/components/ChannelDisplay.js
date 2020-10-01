@@ -16,9 +16,13 @@ const ChannelDisplay = () => {
   }, []);
 
   return (
-    <div>
+    <div className="channel-display">
+    <div className="channel-header">
+      <span>Create a channel</span>
+      <span>+</span>
+    </div>
       {channels.map((channel, index) => (
-        <div key={index}>{channel.name}</div>
+        <div key={index} className="channel-select-button">{channel.name}</div>
       ))}
     </div>
   );

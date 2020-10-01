@@ -1,28 +1,38 @@
 import React from 'react'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 
-import { addChannel } from '../helpers/db'
+import { addChannel, getChannel, updateChannelMessages } from '../helpers/db'
 
-const MessageTextArea =() => {
+const MessageTextArea =(props) => {
     const [message, setMessage] = useState(null)
-    const [channel, setChannel] = useState(null)
+    const [channel, setChannel] = useState(props.selectedChannel)
+    const [channelRef, setchannelRef] = useState(null)
+    const [user, setUser] = useState('dwCGwI2rwBc42CIQHS8jIJ5ZQR12') // TODO: remove test data
 
-
-    // const handleMessageChange = () => {
-
-    // }
+    useEffect(() => {
+        getChannel(channel).then(resolve => {
+            resolve.forEach(doc => {
+                setchannelRef(doc);
+                setChannel(doc.data().name)
+            })
+        });
+        return 
+    }, []);
 
     const handleMessageSubmit = (event) => {
         event.preventDefault()
-
-        console.log(message)
+        event.target.value = '';
+        console.log(channelRef)
+        updateChannelMessages( message, channelRef);
     }
     const handleAddChannel = (event) => {
         event.preventDefault()
-        console.log('Wat ', channel)
+        event.target.value = '';
+        addChannel({ name: channel, uid: 'dwCGwI2rwBc42CIQHS8jIJ5ZQR12' }) // TODO: implement proper messaging
     }
+
     return (
-        <div>
+        <div className="message-input-box">
             <div>
                 
             </div>
