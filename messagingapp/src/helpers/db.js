@@ -30,6 +30,7 @@ export function addChannel(channel) {
         name: channel.name,
         creatorId: channel.uid,
         messages: [],
+        comments: [],
         dateCreated: new Date(),
         memebers: [],
         public: true
@@ -65,6 +66,18 @@ export function updateChannelMessages(messageObject, channelRef) {
     
     .then(() => {
         console.log('new message created');
+    })
+    .catch(error => {
+        console.log('failure', error);
+    })
+}
+export function updateChannelComments(comment, channelRef) {
+    db.collection('channels')
+    .doc(channelRef.id)
+    .update({comments: firebase.firestore.FieldValue.arrayUnion(comment)})
+    
+    .then(() => {
+        console.log('new comment added');
     })
     .catch(error => {
         console.log('failure', error);

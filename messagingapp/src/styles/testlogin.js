@@ -61,7 +61,6 @@ function LoginPage() {
     async function handleEmailSignIn(event){
         event.preventDefault()
         let userResponse = await loginWithEmail(email,password)
-        console.log(userResponse)
     }
 
     async function loginWithGoogle(event) {
@@ -147,4 +146,4 @@ function LoginPage() {
 
 
 
-export default connect()(LoginPage)
+export default connect( )(LoginPage)

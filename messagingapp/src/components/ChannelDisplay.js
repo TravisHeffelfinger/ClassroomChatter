@@ -7,7 +7,6 @@ const ChannelDisplay = () => {
   useEffect(() => {
     getChannels().then((response) => {
       const channels = [];
-      console.log(typeof(response), response)
       response.forEach((channel) => {
         channels.push(channel.data());
       });
