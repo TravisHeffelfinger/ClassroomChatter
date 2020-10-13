@@ -1,4 +1,6 @@
 import React from 'react'
+import { connect } from 'react-redux'
+import { updateChannels, channelChange } from '../actions'
 import ChannelDisplay from '../components/ChannelDisplay'
 import MessageCard from '../components/MessageCard'
 import MessageTextArea from '../components/MessageTextArea'
@@ -8,18 +10,35 @@ import Profile from './Profile'
 
 class Home extends React.Component {
 
-    state={
-        selectedChannel: 'potato'
+    state = {
+        defaultChannel: 'default'
     }
 
     componentDidMount() {
-        getChannel(this.state.selectedChannel).then(resolve => {
-            resolve.forEach(doc => {
-                this.setState({ channel: doc.data(), docId: doc.id })
+        console.log(`this is the props:`, this.props)
+        console.log(`this is the state:`, this.state)
+
+        if (!this.props.selectedChannel) {
+            console.log('if')
+            getChannel(this.state.defaultChannel).then(resolve => {
+                resolve.forEach(doc => {
+                    
+                    this.props.channelChange({ channel: doc.data(), docId: doc.id});
+                })
+            }, reject => {
+                console.log('default channel failed to load');
             })
-        }, reject => {
-            console.log('big failure ', reject)
-        })  
+        } else if (this.props.selectedChannel){
+            console.log('else ')
+            getChannel(this.props.selectedChannel).then(resolve => {
+                resolve.forEach(doc => {
+                    this.setState({ channel: doc.data(), docId: doc.id })
+                })
+            }, reject => {
+                console.log('big failure ', reject)
+            })  
+        }
+        console.log(`this is the state:`, this.state)
     }
 
     displayChannelMessages = () => {
@@ -31,6 +50,7 @@ class Home extends React.Component {
         return result;
     }
     render() {
+        console.log(`this is the state from render:`, this.props)
         return (
             <div className="home-container">
                 <div className="channel-container">
@@ -44,7 +64,7 @@ class Home extends React.Component {
                     <MessageCard />
                     <MessageCard />
                     <MessageCard />
-                    <MessageTextArea selectedChannel={ this.state.selectedChannel } />
+                    <MessageTextArea />
                 </div>
                 <div className="profile-container">
                     <Profile />
@@ -54,4 +74,13 @@ class Home extends React.Component {
     }
 }
 
-export default Home
+const mapStateToProps = state => ({
+    selectedChannel: state.channels.selectedChannel,
+    test: state
+})
+
+const mapDispatchToProps = {
+    updateChannels,
+    channelChange
+}
+export default connect(mapStateToProps, mapDispatchToProps)(Home)

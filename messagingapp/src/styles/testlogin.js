@@ -1,6 +1,6 @@
 import React from 'react';
 import { useState } from 'react'
-import { connect } from 'react-redux'
+import { connect, useDispatch, useStore } from 'react-redux'
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -17,6 +17,7 @@ import Container from '@material-ui/core/Container';
 import GoogleButton from 'react-google-button'
 
 import { loginWithEmail, signInWithGoogle} from '../helpers/auth'
+import { authenticateUser } from '../actions';
 
 function Copyright() {
     return (
@@ -51,16 +52,27 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-function LoginPage() {
+function LoginPage(props) {
 
     const [email, setEmail] = useState(null)
     const [password, setPassword] = useState(null)
+
+    const dispatch = useDispatch();
+    const store = useStore();
 
     const classes = useStyles();
 
     async function handleEmailSignIn(event){
         event.preventDefault()
         let userResponse = await loginWithEmail(email,password)
+        console.log(userResponse)
+        dispatch({
+            type: 'USER_AUTHENTICATED',
+            payload: {
+                authenticated: true
+            }
+        });
+        console.log(store.getState(), 'props => ', props);
     }
 
     async function loginWithGoogle(event) {
@@ -144,6 +156,13 @@ function LoginPage() {
     );
 }
 
+const mapStateToProps = state => ({
+    authenticated: state.auth,
+    authstate: state.auth
+})
 
+const mapDispatchToProps = {
+    authenticate: authenticateUser()
+}
 
-export default connect( )(LoginPage)
+export default connect(mapStateToProps, mapDispatchToProps)(LoginPage)

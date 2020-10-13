@@ -11,7 +11,7 @@ import NavBar from './NavBar'
 class App extends React.Component {
 
     componentDidMount() {
-       // this.checkAuth();
+       
     }
     
     // checkAuth = () => {
@@ -26,6 +26,7 @@ class App extends React.Component {
     // }
         
     render() {
+        console.log(this.props.authenticated)
         return (
             <Router>
                 <div className="app-container">
@@ -46,7 +47,11 @@ class App extends React.Component {
 }
 
 const mapStateToProps = state => ({
-    authenticated: state.authenticated
+    authenticated: state.auth.authenticated,
 })
 
-export default connect(mapStateToProps)(App)
+const mapDispatchToProps = {
+
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(App)

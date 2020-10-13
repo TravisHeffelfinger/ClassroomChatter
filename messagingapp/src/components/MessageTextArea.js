@@ -1,23 +1,15 @@
 import React from 'react'
 import { useState, useEffect } from 'react'
+import { connect } from 'react-redux'
 
 import { addChannel, getChannel, updateChannelMessages } from '../helpers/db'
+import {updateMessages } from '../actions'
 
 const MessageTextArea =(props) => {
     const [message, setMessage] = useState(null)
-    const [channel, setChannel] = useState(props.selectedChannel)
+    const [channel, setChannel] = useState()
     const [channelRef, setchannelRef] = useState(null)
     const [user, setUser] = useState('dwCGwI2rwBc42CIQHS8jIJ5ZQR12') // TODO: remove test data
-
-    useEffect(() => {
-        getChannel(channel).then(resolve => {
-            resolve.forEach(doc => {
-                setchannelRef(doc);
-                setChannel(doc.data().name)
-            })
-        });
-        return 
-    }, []);
 
     const handleMessageSubmit = (event) => {
         event.preventDefault()
@@ -50,4 +42,12 @@ const MessageTextArea =(props) => {
     )
 }
 
-export default MessageTextArea
+const mapStateToProps = state => ({
+    selectedChannel: state.channels.selectedChannel
+})
+
+const mapDispatchToProps = {
+    updateMessages
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(MessageTextArea)

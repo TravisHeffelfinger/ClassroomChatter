@@ -1,0 +1,8 @@
+export const USER_AUTHENTICATED = 'USER_AUTHENTICATED';
+export const USER_DISCONNECTED = 'USER_DISCONNECTED';
+export const GET_USER = 'GET_USER';
+export const MESSAGE_ADDED = 'MESSAGE_ADDED';
+export const ADD_COMMENT = 'ADD_COMMENT';
+export const CHANNEL_CHANGE = 'CHANNEL_CHANGE';
+export const CHANNEL_ADD = 'CHANNEL_ADD';
+export const CHANNEL_LIST = 'CHANNEL_LIST';
