@@ -15,23 +15,23 @@ class App extends React.Component {
             <Router>
                 <div className="app-container">
                 <NavBar />
-                    <Switch>
-                        {this.props.authenticated !== false ? 
-                            <>
+                    
+                        {this.props.authenticated ? 
+                            <Switch>
                             <Route exact path="/" component={Home} />
                             <Route path="/login" component={Home} />
                             <Route path="/signup" component={Home} />
                             <Route component={Home} />
-                            </>
+                            </Switch>
                             :
-                            <>
+                            <Switch>
                             <Route exact path="/" component={LandingPage} />
                             <Route exact path="/login" component={LandingPage} /> // TODO: change this to login page
                             <Route exact path="/signup" component={SignUpPage} />
                             <Route exact path="/testing" component={Home} />
-                            </>
+                            </Switch>
                         }
-                    </Switch>
+                    
                 </div>
             </Router>
         )

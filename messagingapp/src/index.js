@@ -13,7 +13,9 @@ const store = createStore(reducers, window.__REDUX_DEVTOOLS_EXTENSION__ && windo
 
 ReactDOM.render(
     <Provider store={store}>
-        <App />
+    <React.StrictMode>
+    <App />
+    </React.StrictMode> 
     </Provider>,
     document.querySelector('#root')
 )

@@ -11,6 +11,10 @@ body {
   background-color: rgba(0, 0, 0, 0.04);
 }
 
+.custom-button {
+  cursor: pointer;
+}
+
 .app-container {
   display: flex;
   flex-direction: column;
@@ -99,6 +103,13 @@ body {
     font-size: x-large;
     text-align: center;
     padding: 3%;
+}
+
+.channel-select-button {
+  font-size: x-large;
+  text-align: center;
+  padding: 3%;
+  background-color: red;
 }
 
 .profile-name {

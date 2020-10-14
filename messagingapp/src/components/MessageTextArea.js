@@ -1,24 +1,39 @@
 import React from 'react'
 import { useState } from 'react'
-import { connect } from 'react-redux'
+import { connect, useDispatch } from 'react-redux'
 
-import { addChannel, addMessage } from '../helpers/db'
-import {updateMessages } from '../actions'
+import { addChannel, addMessage, getMessages, getChannels } from '../helpers/db'
+import {updateChannels, updateMessages } from '../actions'
 
 const MessageTextArea =(props) => {
-    const [message, setMessage] = useState(null)
-    const [channel, setChannel] = useState()
+    const [message, setMessage] = useState('')
+    const [channel, setChannel] = useState('')
+    const dispatch = useDispatch();
    // const [user, setUser] = useState('dwCGwI2rwBc42CIQHS8jIJ5ZQR12') // TODO: remove test data
 
     const handleMessageSubmit = (event) => {
         event.preventDefault()
-        event.target.value = '';
-        addMessage( message, this.props.selectedChannel, this.props.user);
+        addMessage( message, props.selectedChannel, props.user);
+        getMessages().then(response => {
+            let messages = [];
+            response.forEach(message => {
+                messages.push({ ...message.data(), docId: message.id });
+            })
+            dispatch(updateMessages(messages));
+        });
+        setMessage('');
     }
     const handleAddChannel = (event) => {
         event.preventDefault()
-        event.target.value = '';
         addChannel({ name: channel, uid: 'dwCGwI2rwBc42CIQHS8jIJ5ZQR12' }) // TODO: implement proper messaging
+        getChannels().then(response => {
+            let channels = [];
+            response.forEach(channel => {
+                channels.push({ ...channel.data(), docId: channel.id})
+            })
+            dispatch(updateChannels(channels));
+        })
+        setChannel('')
     }
 
     return (
@@ -32,7 +47,7 @@ const MessageTextArea =(props) => {
             </form>
             
             <form>
-                <input type='textarea' onChange={e => setMessage(e.target.value)}/>
+                <input type='textarea' onChange={e => setMessage(e.target.value)} value={message}/>
                 <button type='submit' onClick={handleMessageSubmit}>Send</button>
             </form>
 

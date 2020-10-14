@@ -39,7 +39,7 @@ export function addChannel(channel) {
         name: channel.name,
         creatorId: channel.uid,
         dateCreated: new Date(),
-        memebers: [],
+        members: [],
         public: true
     })
 }
@@ -53,7 +53,7 @@ export function getChannels() {
 
 export function getMessages() {
     const messagesPromise = new Promise((resolve, reject) => {
-        db.collection('messages').get().then(query => resolve(query))
+        db.collection('messages').orderBy('dateCreated', 'desc').get().then(query => resolve(query))
     })
     return messagesPromise
 }

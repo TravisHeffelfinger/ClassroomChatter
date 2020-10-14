@@ -1,6 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { updateChannels, channelChange, updateMessages } from '../actions'
+import { updateChannels, updateMessages } from '../actions'
 import ChannelDisplay from '../components/ChannelDisplay'
 import MessageCard from '../components/MessageCard'
 import MessageTextArea from '../components/MessageTextArea'
@@ -19,23 +19,14 @@ class Home extends React.Component {
             })
             this.props.updateMessages(messages);
         });
-        if (this.props.selectedChannel) {
-            getChannel(this.props.selectedChannel.name).then(resolve => {
-                resolve.forEach(doc => {
-                    this.setState({ ...doc.data(), docId: doc.id })
-                })
-            }, reject => {
-                console.log('big failure ', reject)
-            })  
-        }
-        console.log(`this is the state after ComponentDidMount:`, this.state)
     }
 
     displayChannelMessages = () => {
         const { selectedChannel, posts, user } = this.props;
         const { messages } = posts;
         const result = messages.map((message, index) => {
-            return <MessageCard channelId={selectedChannel.docId} key={index} messageBody={message.body} username={user.displayName} docId={message.docId} />
+            if(message.channelId === selectedChannel.docId)
+            return <MessageCard channelId={selectedChannel.docId} key={index} messageBody={message.body} username={user.displayName}  docId={message.docId} />
         }) 
         return result;
     }
@@ -68,7 +59,6 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = {
     updateChannels,
-    channelChange,
     updateMessages
 }
 export default connect(mapStateToProps, mapDispatchToProps)(Home)
