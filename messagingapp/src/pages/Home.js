@@ -1,10 +1,11 @@
+import { Paper } from '@material-ui/core'
 import React from 'react'
 import { connect } from 'react-redux'
 import { updateChannels, updateMessages } from '../actions'
 import ChannelDisplay from '../components/ChannelDisplay'
 import MessageCard from '../components/MessageCard'
 import MessageTextArea from '../components/MessageTextArea'
-import { getChannel, getMessages } from '../helpers/db'
+import { getMessages } from '../helpers/db'
 import Profile from './Profile'
 
 class Home extends React.Component {
@@ -33,6 +34,7 @@ class Home extends React.Component {
     // TODO: make sure that line 52 works
     render() {
         return (
+            <Paper>
             <div className="home-container">
                 <div className="channel-container">
                     <ChannelDisplay />
@@ -47,6 +49,7 @@ class Home extends React.Component {
                     <Profile />
                 </div>
             </div>
+            </Paper>
         )
     }
 }
