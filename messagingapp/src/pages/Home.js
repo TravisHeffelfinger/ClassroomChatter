@@ -5,7 +5,7 @@ import { updateChannels, updateMessages } from '../actions'
 import ChannelDisplay from '../components/ChannelDisplay'
 import MessageCard from '../components/MessageCard'
 import MessageTextArea from '../components/MessageTextArea'
-import { getMessages } from '../helpers/db'
+import { getMessages, getChannels } from '../helpers/db'
 import Profile from './Profile'
 
 class Home extends React.Component {
@@ -20,7 +20,15 @@ class Home extends React.Component {
             })
             this.props.updateMessages(messages);
         });
-    }
+
+        getChannels().then((response) => {
+      const channels = [];
+      response.forEach((channel) => {
+        channels.push({...channel.data(), docId: channel.id});
+      });
+      this.props.updateChannels(channels)
+    });
+  }
 
     displayChannelMessages = () => {
         const { selectedChannel, posts, user } = this.props;
@@ -34,7 +42,7 @@ class Home extends React.Component {
     // TODO: make sure that line 52 works
     render() {
         return (
-            <Paper>
+            <Paper elevation={3}>
             <div className="home-container">
                 <div className="channel-container">
                     <ChannelDisplay />

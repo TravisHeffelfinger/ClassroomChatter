@@ -68,9 +68,9 @@ export const getMessages = messages => {
     }
 }
 
-export const updateComments = comments => {
-    return {
-        type: types.MESSAGE_ADDED,
+export const addComment = comments => {
+    return{
+        type: types.ADD_COMMENT,
         payload: {
             comments
         }
