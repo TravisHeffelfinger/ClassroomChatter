@@ -1,39 +1,46 @@
 import { combineReducers } from 'redux';
-import { ADD_COMMENT, CHANNEL_ADD, CHANNEL_CHANGE, GET_USER, MESSAGE_ADDED, USER_AUTHENTICATED, USER_DISCONNECTED } from '../helpers/types';
+import types from '../helpers/types';
 
-function authReducer(state = false, action) {
-    if(action.type === USER_AUTHENTICATED) {
+let defaultUser = {
+    bio: "I am the first test of Signup",
+    displayName: "ExampleProject",
+    email: "test@email.com",
+    firstName: "Travis",
+    lastName: "Heffelfinger",
+    photoURL: null,
+    uid: "dwCGwI2rwBc42CIQHS8jIJ5ZQR12",
+    website: "website.com"
+}
+
+function authReducer(state = {authenticated: true}, action) { // TODO: change back to false
+    if(action.type === types.USER_AUTHENTICATED) {
         return { ...state, authenticated: action.payload.authenticated }
-    } else if (action.type === USER_DISCONNECTED) {
+    } else if (action.type === types.USER_DISCONNECTED) {
         return { ...state, authenticated: action.payload.authenticated }
     }
     return state
 }
 
-function userReducer( state = {}, action) {
-    if (action.type=== GET_USER) {
+function userReducer( state = {...defaultUser}, action) {
+    if (action.type === types.GET_USER) {
         return { ...state, user: action.payload.user }
     }
     return state
 }
 
-function messagesReducer(state=[], action) {
-    if(action.type === MESSAGE_ADDED) {
-        let currentMessages = state.messages;
-        currentMessages.push(action.payload.message);
-        return { ...state, messages: currentMessages };
-    } else if(action.type === ADD_COMMENT) {
-        let currentComments = state.comments;
-        currentComments.push(action.payload.comments);
-        return {...state , comments: currentComments};
+function postsReducer(state={messages: []}, action) {
+    if(action.type === types.MESSAGE_ADDED) { 
+        return { ...state, ...action.payload };
+    } else if(action.type === types.ADD_COMMENT) {
+        return {...state , comments: action.payload};
     }
     return state
 }
 
-function channelReducer(state={}, action) {
-    if(action.type === CHANNEL_CHANGE) {
+function channelReducer(state={selectedChannel: {creatorId: 'default', dateCreated: '00:00:00', name: 'default', public: true, members: [], docId: '6I5S8EZ6wdMEk4DRHY5b' }}, action) {
+    if(action.type === types.CHANNEL_CHANGE) {
         return {...state, selectedChannel: action.payload.channel };
-    } else if (action.type === CHANNEL_ADD) {
+    } else if (action.type === types.CHANNEL_ADD) {
         return state;
     }
     return state;
@@ -43,6 +50,6 @@ function channelReducer(state={}, action) {
 export default combineReducers({
     auth: authReducer,
     user: userReducer,
-    messages: messagesReducer,
+    posts: postsReducer,
     channels: channelReducer
 })

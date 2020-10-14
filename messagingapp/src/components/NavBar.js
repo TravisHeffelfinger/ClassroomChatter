@@ -8,9 +8,9 @@ function NavBar() {
 
     const signout = () => {
         firebased.auth().signOut();
-        dispatch(() => ({type: 'USER_DISCONNECTED', payload: { authenticated: false}}))
-        console.log(firebased.auth().currentUser())
+        dispatch({type: 'USER_DISCONNECTED', payload: { authenticated: false}})
     }
+    
     return (
         <div className="nav-container">
             <NavLink className="nav-link" to="/createChannel">Create Channel</NavLink>

@@ -1,6 +1,11 @@
 import React from 'react'
+import { connect } from 'react-redux'
 
 class Profile extends React.Component {
+
+    componentDidUpdate() {
+
+    }
 
     render() {
         return (
@@ -25,4 +30,12 @@ class Profile extends React.Component {
     }
 }
 
-export default Profile
+const mapStateToProps = state => ({
+    user: state.user
+})
+
+const mapDispatchToProps = {
+    
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Profile)

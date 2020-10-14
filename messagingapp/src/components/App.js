@@ -4,41 +4,33 @@ import { connect } from 'react-redux'
 
 import Home from '../pages/Home'
 import LandingPage from '../pages/LandingPage'
-import { firebased } from '../services/firebase'
 import SignUpPage from '../pages/SignUpPage'
-import NavBar from './NavBar'
+import NavBar from '../components/NavBar'
+import { updateChannels, updateMessages } from '../actions'
 
 class App extends React.Component {
-
-    componentDidMount() {
-       
-    }
-    
-    // checkAuth = () => {
-    //     firebased.auth().onAuthStateChanged((user) =>  {
-    //         if (user) {
-    //             console.log('ding-dong');
-    //             this.setState({authenticated: true})
-    //         } else {
-    //             this.setState({authenticated: false})
-    //         }
-    //     })
-    // }
         
     render() {
-        console.log(this.props.authenticated)
         return (
             <Router>
                 <div className="app-container">
                 <NavBar />
                     <Switch>
-                        <Route exact path='/'>
-                            {this.props.authenticated ? <Route path='/home' component={Home}/>: <Redirect to='/login' />}  
-                        </Route>
-                        <Route path='/login' component={LandingPage} />
-                        <Route path='/signup' component={SignUpPage} />
-                        <Route path="/t" component={Home} />
-                        {this.props.authenticated ? <Route path='/home' component={Home}/> : <Redirect to='/login' />}
+                        {this.props.authenticated !== false ? 
+                            <>
+                            <Route exact path="/" component={Home} />
+                            <Route path="/login" component={Home} />
+                            <Route path="/signup" component={Home} />
+                            <Route component={Home} />
+                            </>
+                            :
+                            <>
+                            <Route exact path="/" component={LandingPage} />
+                            <Route exact path="/login" component={LandingPage} /> // TODO: change this to login page
+                            <Route exact path="/signup" component={SignUpPage} />
+                            <Route exact path="/testing" component={Home} />
+                            </>
+                        }
                     </Switch>
                 </div>
             </Router>
@@ -51,7 +43,8 @@ const mapStateToProps = state => ({
 })
 
 const mapDispatchToProps = {
-
+    updateChannels,
+    updateMessages
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(App)

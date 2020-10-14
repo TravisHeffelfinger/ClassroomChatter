@@ -66,12 +66,7 @@ function LoginPage(props) {
         event.preventDefault()
         let userResponse = await loginWithEmail(email,password)
         console.log(userResponse)
-        dispatch({
-            type: 'USER_AUTHENTICATED',
-            payload: {
-                authenticated: true
-            }
-        });
+        dispatch(authenticateUser());
         console.log(store.getState(), 'props => ', props);
     }
 
@@ -157,8 +152,7 @@ function LoginPage(props) {
 }
 
 const mapStateToProps = state => ({
-    authenticated: state.auth,
-    authstate: state.auth
+    authenticated: state.auth.authenticated
 })
 
 const mapDispatchToProps = {

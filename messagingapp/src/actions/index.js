@@ -1,8 +1,8 @@
-import { ADD_COMMENT, CHANNEL_ADD, CHANNEL_CHANGE, CHANNEL_LIST, GET_USER, MESSAGE_ADDED, USER_AUTHENTICATED, USER_DISCONNECTED } from '../helpers/types';
+import  types from '../helpers/types';
 
 export const getUser = user => {
     return {
-        type: GET_USER,
+        type: types.GET_USER,
         payload: {
             userId: user.uid,
             displayName: user.displayName,
@@ -16,7 +16,7 @@ export const getUser = user => {
 
 export const authenticateUser = () => {
     return {
-        type: USER_AUTHENTICATED,
+        type: types.USER_AUTHENTICATED,
         payload: {
             authenticated: true
         }
@@ -25,7 +25,7 @@ export const authenticateUser = () => {
 
 export const disconnectUser = () => {
     return {
-        type: USER_DISCONNECTED,
+        type: types.USER_DISCONNECTED,
         payload: {
             authenticated: false
         }
@@ -34,7 +34,7 @@ export const disconnectUser = () => {
 
 export const updateChannels = channels => {
     return {
-        type: CHANNEL_LIST,
+        type: types.CHANNEL_LIST,
         payload: {
             channels
         }
@@ -43,25 +43,34 @@ export const updateChannels = channels => {
 
 export const channelChange = channel => {
     return {
-        type: CHANNEL_CHANGE,
+        type: types.CHANNEL_CHANGE,
         payload: {
-            channel: channel
+           channel
         }
     }
 }
 
 export const updateMessages = messages => {
     return {
-        type: MESSAGE_ADDED,
+        type: types.MESSAGE_ADDED,
         payload: {
             messages
         }
     }
 }
 
+export const getMessages = messages => {
+    return {
+        type: types.GET_MESSAGES,
+        payload: {
+            ...messages
+        }
+    }
+}
+
 export const updateComments = comments => {
     return {
-        type: MESSAGE_ADDED,
+        type: types.MESSAGE_ADDED,
         payload: {
             comments
         }

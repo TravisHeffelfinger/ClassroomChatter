@@ -8,7 +8,7 @@ const ChannelDisplay = () => {
     getChannels().then((response) => {
       const channels = [];
       response.forEach((channel) => {
-        channels.push(channel.data());
+        channels.push({...channel.data(), docId: channel.id});
       });
       setChannels(channels);
     });
@@ -18,7 +18,7 @@ const ChannelDisplay = () => {
     <div className="channel-display">
     <div className="channel-header">
       <span>Create a channel</span>
-      <span>+</span>
+      <span className="create-channel-button">+</span>
     </div>
       {channels.map((channel, index) => (
         <div key={index} className="channel-select-button">{channel.name}</div>

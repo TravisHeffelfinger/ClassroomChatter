@@ -1,4 +1,4 @@
-import { db, firebased } from '../services/firebase'
+import { db } from '../services/firebase'
 import firebase from 'firebase'
 
 export function addMessageOld(message) { // TODO: review this function when Redux is implemented
@@ -18,6 +18,15 @@ export function addUser(user) {
     })
 }
 
+export function updateUser(user, newFields) {
+    db.collection('users')
+    .doc(user.docId)
+    .update({ ...newFields })
+    .then(res => {
+        console.log('user updated!')
+    });
+}
+
 export function signUpUser(user) {
     return db.collection('users').add(
         {
@@ -29,8 +38,6 @@ export function addChannel(channel) {
     return db.collection('channels').add({
         name: channel.name,
         creatorId: channel.uid,
-        messages: [],
-        comments: [],
         dateCreated: new Date(),
         memebers: [],
         public: true
@@ -42,6 +49,13 @@ export function getChannels() {
         db.collection('channels').get().then(query => resolve(query))
     })
     return channelsPromise
+}
+
+export function getMessages() {
+    const messagesPromise = new Promise((resolve, reject) => {
+        db.collection('messages').get().then(query => resolve(query))
+    })
+    return messagesPromise
 }
 
 export  function getChannel(channelName) {
@@ -59,11 +73,15 @@ export  function getChannel(channelName) {
     return channelsPromise
 }
 
-export function updateChannelMessages(messageObject, channelRef) {
-    db.collection('channels')
-    .doc(channelRef.id)
-    .update({messages: firebase.firestore.FieldValue.arrayUnion(messageObject)})
-    
+export function addMessage(messageObject, channelRef, userRef) {
+    db.collection('messages')
+    .add({
+        body: messageObject,
+        channelId: channelRef.docId,
+        userId: userRef.uid,
+        displayName: userRef.displayName,
+        dateCreated: new Date()
+    })
     .then(() => {
         console.log('new message created');
     })
