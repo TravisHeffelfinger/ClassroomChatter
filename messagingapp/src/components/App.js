@@ -12,26 +12,25 @@ import SignUpPage from "../pages/SignUpPage";
 import NavBar from "../components/NavBar";
 import { updateChannels, updateMessages } from "../actions";
 import { Paper } from "@material-ui/core";
+import Edit from './Edit'
 
 class App extends React.Component {
   render() {
     return (
       <Router>
         <Paper className="app-container">
-          <NavBar />
+          {this.props.authenticated && <NavBar />}
 
           {this.props.authenticated ? (
             <Switch>
               <Route exact path="/" component={Home} />
-              <Route path="/login" component={Home} />
-              <Route path="/signup" component={Home} />
+              <Route path="/edit" component={Edit} />
               <Route component={Home} />
             </Switch>
           ) : (
             <Switch>
               <Route exact path="/" component={LandingPage} />
-              <Route exact path="/login" component={LandingPage} /> // TODO:
-              change this to login page
+              <Route exact path="/login" component={LandingPage} />
               <Route exact path="/signup" component={SignUpPage} />
             </Switch>
           )}

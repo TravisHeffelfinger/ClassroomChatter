@@ -1,15 +1,4 @@
 import { db } from "../services/firebase";
-import firebase from "firebase";
-
-export function addMessageOld(message) {
-  // TODO: review this function when Redux is implemented
-  return db.collection("messages").add({
-    text: message.text,
-    userId: message.userId,
-    messageReplies: message.replies,
-    dateCreated: new Date(),
-  });
-}
 
 export function addUser(user) {
   return db.collection("users").add({
@@ -19,18 +8,32 @@ export function addUser(user) {
   });
 }
 
+export function getUserData(userId) {
+    const userPromise = new Promise((resolve, reject) => {
+        return db.collection("users").where("uid", "==", userId).get().then((query) => {
+          query.forEach((user) => {
+              console.log('this is from db getUserData',user.id)
+            resolve({ ...user.data(), docId: user.id });
+          });
+        },
+          (rej) => {console.log('This is from the userPromise', userId)});
+    })
+    return userPromise
+}
+
 export function updateUser(user, newFields) {
   db.collection("users")
     .doc(user.docId)
     .update({ ...newFields })
-    .then((res) => {
-      console.log("user updated!");
+    .then(() => {
+    }, rej => {
+        console.log(rej)
     });
 }
 
 export function signUpUser(user) {
   return db.collection("users").add({
-    ...user,
+    ...user, dateCreated: new Date()
   });
 }
 export function addChannel(channel) {
@@ -89,7 +92,8 @@ export function addMessage(messageObject, channelRef, userRef) {
     .add({
       body: messageObject,
       channelId: channelRef.docId,
-      userId: userRef.uid,
+      userId: userRef.userId,
+      userImg: userRef.photoURL,
       displayName: userRef.displayName,
       dateCreated: new Date(),
     })

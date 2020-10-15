@@ -8,11 +8,11 @@ let defaultUser = {
   firstName: "Travis",
   lastName: "Heffelfinger",
   photoURL: "http://picsum.photos/200",
-  uid: "dwCGwI2rwBc42CIQHS8jIJ5ZQR12",
+  userId: "dwCGwI2rwBc42CIQHS8jIJ5ZQR12",
   website: "website",
 };
 
-function authReducer(state = { authenticated: true }, action) {
+function authReducer(state = { authenticated: false }, action) {
   if (action.type === types.USER_AUTHENTICATED) {
     return { ...state, authenticated: action.payload.authenticated };
   } else if (action.type === types.USER_DISCONNECTED) {

@@ -75,7 +75,7 @@ const ChannelDisplay = () => {
           <Button
             key={channel.docId}
             variant="outlined"
-            fullWidth="true"
+            fullWidth={true}
             color="primary"
             onClick={() => handleChannelChange(channel)}
           >
@@ -85,7 +85,7 @@ const ChannelDisplay = () => {
           <Button
             key={channel.docId}
             variant="text"
-            fullWidth="true"
+            fullWidth={true}
             onClick={() => handleChannelChange(channel)}
           >
             {channel.name}

@@ -1,4 +1,4 @@
-import { Button, Paper } from '@material-ui/core';
+import { Button, Paper, AppBar, Toolbar } from '@material-ui/core';
 import React from 'react'
 import { useDispatch } from 'react-redux';
 import { NavLink } from 'react-router-dom'
@@ -14,21 +14,32 @@ function NavBar() {
     }
     
     return (
-      <Paper elevation={2} variant="elevation" square="true" className="nav-container">
-        <Button className="nav-link-button" variant="text" color="primary">
-          <NavLink className="nav-link" to="/createChannel">
-            Create Channel
+      <AppBar position="static">
+        <Toolbar className="nav-container">
+          <NavLink to="/edit">
+            <Button className="nav-link-button" variant="text">
+              Edit Profile
+            </Button>
           </NavLink>
-        </Button>
-        <Button className="nav-link-button" variant="text" color="primary">
-          <NavLink className="nav-link" to="/">
-            Home
+          <NavLink to="/">
+            <Button
+              className="nav-link-button"
+              variant="text"
+              color="default"
+            >
+              Home
+            </Button>
           </NavLink>
-        </Button>
-        <Button variant="text" color="secondary" className="nav-link-button" onClick={signout}>
-          Log Out
-        </Button>
-      </Paper>
+          <Button
+            variant="text"
+            color="secondary"
+            className="nav-link-button"
+            onClick={signout}
+          >
+            Log Out
+          </Button>
+        </Toolbar>
+      </AppBar>
     );
 }
 

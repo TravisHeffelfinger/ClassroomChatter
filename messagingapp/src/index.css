@@ -15,6 +15,43 @@ body {
   cursor: pointer;
 }
 
+.signup-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-end;
+  height: 100%;
+  width: 50%;
+  margin: auto;
+  background-color: white;
+}
+.signup-form-container{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100;
+  margin: auto;
+}
+
+.signup-label {
+  margin-top: 1%;
+}
+.signup-button {
+  margin: 5% 0;
+}
+
+.signup-input {
+  margin-bottom: 1%;
+}
+
+.signup-label,
+.signup-input,
+.signup-button {
+  display: block;
+}
+
+
 .app-container {
   display: flex;
   flex-direction: column;
@@ -44,6 +81,7 @@ body {
   width: 10%;
   height: 80%;
   margin: 0 5%;
+  text-decoration: none;
 }
 
 .nav-link {
@@ -57,7 +95,7 @@ body {
   position: relative;
   width: 90%;
   min-height: 20%;
-  max-height: 30%;
+  max-height: 50%;
   margin: 2% auto;
 }
 
@@ -132,8 +170,7 @@ body {
 
 .message-input-box {
     position: fixed;
-    background-color: grey;
     bottom: 0;
-    height: 10%;
+    height: 12%;
     width: 39.8%;
 }

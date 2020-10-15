@@ -7,9 +7,12 @@ export const getUser = user => {
             userId: user.uid,
             displayName: user.displayName,
             email: user.email,
-            photoURL: user.photoURL,
+            firstName: user.firstName,
+            lastName: user.lastName,
+            photoURL: 'http://picsum.photos/200',
             website: user.website,
-            bio: user.bio
+            bio: user.bio,
+            docId: user.docId
         }
     }
 }

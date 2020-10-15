@@ -1,11 +1,17 @@
-import { Button, Card, TextareaAutosize, TextField, Typography } from "@material-ui/core";
+import { Avatar, IconButton, Card, CardContent, CardHeader, List, ListItem, ListItemAvatar, ListItemText, TextField, Typography } from "@material-ui/core";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useStore } from "react-redux";
 import { addMessageComment, getComments } from "../helpers/db";
 import { addComment } from "../actions";
 
+import FavoriteBorder from '@material-ui/icons/FavoriteBorder'
+import Favorite from "@material-ui/icons/Favorite";
+import SendRounded from "@material-ui/icons/SendRounded"
+
+
 const MessageCard = (props) => {
   const [comment, setComment] = useState("");
+  const [like, setLike] = useState(false)
   const dispatch = useDispatch();
   const store = useStore();
   useEffect(() => {
@@ -22,7 +28,8 @@ const MessageCard = (props) => {
     let comments = [];
     addMessageComment({
       commentBody: comment,
-      userId: store.getState().user.uid,
+      userId: store.getState().user.userId,
+      userImg: store.getState().user.photoURL,
       displayName: store.getState().user.displayName,
       messageId: props.docId,
     });
@@ -40,10 +47,20 @@ const MessageCard = (props) => {
       if (comment.messageId === props.docId) {
         return (
           <div key={comment.docId}>
-            <Typography variant="subtitle2" key={comment.userId}>
-              {comment.displayName}:{" "}
-            </Typography>
-            <Typography variant="caption">{comment.commentBody}</Typography>
+            <List dense={true}>
+                <ListItem>
+                  <ListItemAvatar>
+                    <Avatar
+                    variant="rounded"
+                      src={comment.userImg}
+                    />
+                  </ListItemAvatar>
+                  <ListItemText
+                    primary={comment.displayName}
+                    secondary={comment.commentBody}
+                  />
+                </ListItem>
+            </List>
           </div>
         );
       }
@@ -53,34 +70,45 @@ const MessageCard = (props) => {
 
   return (
     <Card className="message-card">
-      <Typography variant="h5" className="message-title">{props.username}</Typography>
-      <Typography className="message-timestamp">{props.dateCreated}</Typography>
-      <Typography variant="body1" className="message-body">{props.messageBody}</Typography>
-      {displayComments()}
-      <TextField
-        placeholder="Post a comment!"
-        id="outlined-multiline-static"
-        label="Post a comment!"
-        multiline
-        fullwidth="true"
-        rows={2}
-        value={comment}
-        variant="outlined"
-        onChange={(e) => setComment(e.target.value)}
-        className="comment-box"
+      <CardHeader
+        avatar={<Avatar src={props.userImg} />}
+        title={
+          <Typography variant="h5" className="message-title">
+            {props.username}
+          </Typography>
+        }
       />
-      <Button
-        type="button"
-        variant="contained"
-        className="post-button"
-        color="primary"
-        onClick={handleComment}
-      >
-        Post
-      </Button>
-      <Button variant="contained" className="like-button">
-        Like
-      </Button>
+      <CardContent>
+        <Typography variant="body1" className="message-body">
+          {props.messageBody}
+        </Typography>
+        {displayComments()}
+      </CardContent>
+        <TextField
+          placeholder="Post a comment!"
+          id="outlined-multiline-static"
+          label="Post a comment!"
+          multiline
+          fullwidth="true"
+          rows={2}
+          value={comment}
+          variant="outlined"
+          onChange={(e) => setComment(e.target.value)}
+          className="comment-box"
+        />
+        <IconButton
+          type="button"
+          variant="contained"
+          className="post-button"
+          color="primary"
+          disabled={comment !== "" ?  false:  true}
+          onClick={handleComment}
+        >
+          <SendRounded />
+        </IconButton>
+        <IconButton variant="contained" className="like-button" onClick={(e) => setLike(!like)}>
+          {like ? <Favorite color="primary"/> :  <FavoriteBorder /> }
+        </IconButton>
     </Card>
   );
 };
