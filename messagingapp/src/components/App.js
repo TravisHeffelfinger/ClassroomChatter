@@ -11,12 +11,13 @@ import LandingPage from "../pages/LandingPage";
 import SignUpPage from "../pages/SignUpPage";
 import NavBar from "../components/NavBar";
 import { updateChannels, updateMessages } from "../actions";
+import { Paper } from "@material-ui/core";
 
 class App extends React.Component {
   render() {
     return (
       <Router>
-        <div className="app-container">
+        <Paper className="app-container">
           <NavBar />
 
           {this.props.authenticated ? (
@@ -34,7 +35,7 @@ class App extends React.Component {
               <Route exact path="/signup" component={SignUpPage} />
             </Switch>
           )}
-        </div>
+        </Paper>
       </Router>
     );
   }

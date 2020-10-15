@@ -1,4 +1,4 @@
-import { Card } from "@material-ui/core";
+import { Button, Card, TextareaAutosize, TextField, Typography } from "@material-ui/core";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useStore } from "react-redux";
 import { addMessageComment, getComments } from "../helpers/db";
@@ -40,8 +40,10 @@ const MessageCard = (props) => {
       if (comment.messageId === props.docId) {
         return (
           <div key={comment.docId}>
-            <span key={comment.userId}>{comment.displayName}: </span>
-            {comment.commentBody}
+            <Typography variant="subtitle2" key={comment.userId}>
+              {comment.displayName}:{" "}
+            </Typography>
+            <Typography variant="caption">{comment.commentBody}</Typography>
           </div>
         );
       }
@@ -50,27 +52,35 @@ const MessageCard = (props) => {
   };
 
   return (
-    <Card>
-      <div className="message-card">
-        <h3 className="message-title">{props.username}</h3>
-        <h5 className="message-timestamp">{props.dateCreated}</h5>
-        <div className="message-body">{props.messageBody}</div>
-        {displayComments()}
-        <input
-          type="textarea"
-          placeholder="Post a comment!"
-          className="comment-box"
-          onChange={(e) => setComment(e.target.value)}
-          value={comment}
-        />
-        <input
-          type="button"
-          value="Post"
-          className="post-button"
-          onClick={handleComment}
-        />
-        <input type="button" value="Like" className="like-button" />
-      </div>
+    <Card className="message-card">
+      <Typography variant="h5" className="message-title">{props.username}</Typography>
+      <Typography className="message-timestamp">{props.dateCreated}</Typography>
+      <Typography variant="body1" className="message-body">{props.messageBody}</Typography>
+      {displayComments()}
+      <TextField
+        placeholder="Post a comment!"
+        id="outlined-multiline-static"
+        label="Post a comment!"
+        multiline
+        fullwidth="true"
+        rows={2}
+        value={comment}
+        variant="outlined"
+        onChange={(e) => setComment(e.target.value)}
+        className="comment-box"
+      />
+      <Button
+        type="button"
+        variant="contained"
+        className="post-button"
+        color="primary"
+        onClick={handleComment}
+      >
+        Post
+      </Button>
+      <Button variant="contained" className="like-button">
+        Like
+      </Button>
     </Card>
   );
 };

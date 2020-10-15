@@ -7,13 +7,12 @@ let defaultUser = {
   email: "test@email.com",
   firstName: "Travis",
   lastName: "Heffelfinger",
-  photoURL: "https://picsum.photos/200",
+  photoURL: "http://picsum.photos/200",
   uid: "dwCGwI2rwBc42CIQHS8jIJ5ZQR12",
-  website: "website.com",
+  website: "website",
 };
 
 function authReducer(state = { authenticated: true }, action) {
-  // TODO: change back to false
   if (action.type === types.USER_AUTHENTICATED) {
     return { ...state, authenticated: action.payload.authenticated };
   } else if (action.type === types.USER_DISCONNECTED) {
@@ -24,7 +23,7 @@ function authReducer(state = { authenticated: true }, action) {
 
 function userReducer(state = { ...defaultUser }, action) {
   if (action.type === types.GET_USER) {
-    return { ...state, user: action.payload.user };
+    return { ...state, ...action.payload };
   }
   return state;
 }

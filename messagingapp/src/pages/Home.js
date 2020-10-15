@@ -42,7 +42,7 @@ class Home extends React.Component {
     // TODO: make sure that line 52 works
     render() {
         return (
-            <Paper elevation={3}>
+            
             <div className="home-container">
                 <div className="channel-container">
                     <ChannelDisplay />
@@ -57,7 +57,7 @@ class Home extends React.Component {
                     <Profile />
                 </div>
             </div>
-            </Paper>
+            
         )
     }
 }

@@ -3,6 +3,8 @@ import { signUpUser } from "../helpers/db";
 import { signUpWithEmail } from "../helpers/auth";
 import { firebased } from "../services/firebase";
 import { Redirect } from "react-router-dom";
+import { authenticateUser, getUser } from '../actions'
+import { connect } from "react-redux";
 
 class SignUpPage extends React.Component {
   state = {
@@ -31,8 +33,11 @@ class SignUpPage extends React.Component {
         website: this.state.website,
         bio: this.state.bio,
       };
+      
       await signUpUser(user);
       this.setState({ authenticated: true });
+      this.props.getUser(user);
+      this.props.authenticateUser();
     } else {
       console.log("signup failed");
     }
@@ -106,4 +111,13 @@ class SignUpPage extends React.Component {
   }
 }
 
-export default SignUpPage;
+const mapStateToProps = state => ({
+    authenticated: state.auth.authenticated
+})
+
+const mapDispatchToProps = {
+  authenticateUser,
+  getUser
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(SignUpPage);

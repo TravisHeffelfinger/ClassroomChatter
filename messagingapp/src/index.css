@@ -40,26 +40,17 @@ body {
   align-items: center;
   height: 15%;
 }
-.nav-link {
+.nav-link-button {
   width: 10%;
   height: 80%;
   margin: 0 5%;
+}
+
+.nav-link {
   line-height: 330%;
   text-decoration: none;
   text-align: center;
   vertical-align: middle;
-}
-
-
-
-
-.nav-link,
-.nav-container,
-.message-card,
-.message-title,
-.channel-display,
-.message-input-box {
-  border: 1px solid red;
 }
 
 .message-card {
@@ -82,6 +73,7 @@ body {
 .comment-box {
     width: 80%;
     margin: 2% 1% 2% 2%;
+   
 }
 
 .post-button {

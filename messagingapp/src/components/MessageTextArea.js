@@ -4,8 +4,9 @@ import { connect, useDispatch } from 'react-redux'
 
 import { addMessage, getMessages,  } from '../helpers/db'
 import { updateMessages } from '../actions'
+import { Card, TextField, Button } from '@material-ui/core'
 
-const MessageTextArea =(props) => {
+const MessageTextArea = (props) => {
     const [message, setMessage] = useState('')
     const dispatch = useDispatch();
    // const [user, setUser] = useState('dwCGwI2rwBc42CIQHS8jIJ5ZQR12') // TODO: remove test data
@@ -22,16 +23,12 @@ const MessageTextArea =(props) => {
         });
         setMessage('');
     }
-    
 
     return (
-        <div className="message-input-box">
-            <form>
-                <input type='textarea' onChange={e => setMessage(e.target.value)} value={message}/>
-                <button type='submit' onClick={handleMessageSubmit}>Send</button>
-            </form>
-
-        </div>
+        <Card elevation={15} className="message-input-box">
+            <TextField color="primary" variant="outlined" fullwidth={true}  multiline={3} onChange={e => setMessage(e.target.value)} value={message}/>
+            <Button variant="contained" color="primary" onClick={handleMessageSubmit}>Send</Button>
+        </Card>
     )
 }
 

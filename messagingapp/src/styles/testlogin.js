@@ -66,6 +66,7 @@ function LoginPage(props) {
         event.preventDefault()
         let userResponse = await loginWithEmail(email,password)
         console.log(userResponse)
+        //TODO: fix userinfo for Redux Store
         dispatch(authenticateUser());
         console.log(store.getState(), 'props => ', props);
     }
