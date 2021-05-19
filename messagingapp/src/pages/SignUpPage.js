@@ -5,7 +5,7 @@ import { firebased } from "../services/firebase";
 import { Link, Redirect } from "react-router-dom";
 import { authenticateUser, getUser } from "../actions";
 import { connect } from "react-redux";
-import { Button, InputLabel, TextField, Typography } from "@material-ui/core";
+import { Button, InputLabel, TextField, Typography, Grid} from "@material-ui/core";
 
 class SignUpPage extends React.Component {
   state = {
@@ -63,9 +63,9 @@ class SignUpPage extends React.Component {
       return <Redirect to="/" />;
     }
     return (
-      <div className="signup-container">
+      <Grid container className="signup-container">
         <Typography variant="h3">Welcome to Classroom Chatter!</Typography>
-        <div className="signup-form-container">
+        <Grid item xs={8} className="signup-form-container">
           <form>
             <div>
               <TextField
@@ -165,8 +165,8 @@ class SignUpPage extends React.Component {
             </InputLabel>{" "}
             <Link to="/login">sign in</Link>
           </form>
-        </div>
-      </div>
+        </Grid>
+      </Grid>
     );
   }
 }

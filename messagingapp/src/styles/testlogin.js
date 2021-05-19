@@ -25,7 +25,7 @@ function Copyright() {
     <Typography variant="body2" color="textSecondary" align="center">
       {"Copyright © "}
       <Link color="inherit" href="https://material-ui.com/">
-        Your Website
+      Travis Heffelfinger
       </Link>{" "}
       {new Date().getFullYear()}
       {"."}
@@ -56,6 +56,7 @@ const useStyles = makeStyles((theme) => ({
 function LoginPage() {
   const [email, setEmail] = useState(null);
   const [password, setPassword] = useState(null);
+  const [error, setError] = useState(false);
 
   const dispatch = useDispatch();
   const store = useStore();
@@ -65,16 +66,22 @@ function LoginPage() {
   async function handleEmailSignIn(event) {
     event.preventDefault();
     let userResponse = await loginWithEmail(email, password);
-    getUserData(userResponse.user.uid).then(
+    console.log('made it this far')
+    try {
+        getUserData(userResponse.user.uid).then(
       (resolve) => {
           dispatch(getUser(resolve));
           dispatch(authenticateUser());
           console.log(store.getState());
       },
       (reject) => {
-        return reject;
+        console.log(reject);
       }
-    );
+        );
+    } catch(error) {
+        console.log('this error came from catch ' + error)
+        setError('Invalid email or password');
+    }
     
     
   }
@@ -101,6 +108,8 @@ function LoginPage() {
             margin="normal"
             required
             fullWidth
+            error={error}
+            helperText={error ? 'Invalid email or password': ''}
             id="email"
             label="Email Address"
             name="email"
@@ -125,33 +134,37 @@ function LoginPage() {
             }}
           />
           <FormControlLabel
+            id="remember-me"
             control={<Checkbox value="remember" color="primary" />}
             label="Remember me"
           />
           <Button
             type="submit"
-            fullWidth
             variant="contained"
             color="primary"
+            id="login-button"
             className={classes.submit}
           >
             Sign In
           </Button>
-          <GoogleButton
+          <div >
+              <GoogleButton
+              className="google-button"
             fullwidth="true"
             variant="contained"
             type="light"
             onClick={loginWithGoogle}
-          />
+          /></div>
+        
           <Grid container>
             <Grid item xs>
-              <Link href="/home" variant="body2">
+              <Link href="/#/home" variant="body2">
                 {" "}
                 Forgot Password?
               </Link>
             </Grid>
             <Grid item>
-              <Link href="/signup" variant="body2">
+              <Link href="/#/signup" variant="body2">
                 {"Don't have an account? Sign Up"}
               </Link>
             </Grid>

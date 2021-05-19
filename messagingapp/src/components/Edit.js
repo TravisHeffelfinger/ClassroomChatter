@@ -1,4 +1,4 @@
-import { Button, TextField } from "@material-ui/core";
+import { Button, Grid, TextField } from "@material-ui/core";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useStore } from "react-redux";
 import firebase from "firebase";
@@ -23,6 +23,7 @@ const Edit = (props) => {
     let userResponse;
     async function getUserInfo() {
       userResponse = await firebase.auth().currentUser;
+      console.log(userResponse)
       userData = await getUserData(userResponse.uid);
     }
     getUserInfo();
@@ -43,11 +44,11 @@ const Edit = (props) => {
   };
 
   return (
-    <div>
+    <Grid container>
       {store.getState().auth.authenticated === false || updated ? (
         <Redirect to="/" />
       ) : null}
-      <div className="signup-form-container">
+      <Grid item xs={8} className="signup-form-container">
         <form>
           <div>
             <TextField
@@ -129,8 +130,8 @@ const Edit = (props) => {
             </Button>
           </div>
         </form>
-      </div>
-    </div>
+      </Grid>
+    </Grid>
   );
 };
 

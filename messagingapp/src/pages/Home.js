@@ -1,3 +1,4 @@
+import { Container, Grid } from "@material-ui/core";
 import React from "react";
 import { connect } from "react-redux";
 import { updateChannels, updateMessages } from "../actions";
@@ -47,19 +48,27 @@ class Home extends React.Component {
 
   render() {
     return (
-      <div className="home-container">
-        <div className="channel-container">
+      //<div className="home-container">
+      <Grid container direction="row" justify="center" >
+          <Grid item xs={3} >
+        {/* <div className="channel-container"> */}
           <ChannelDisplay />
-        </div>
-        <div className="message-container">
-          {this.displayChannelMessages()}
+        {/* </div> */}
+        </Grid>
+        {/* <div className="message-container"> */}
+          <Grid item xs={6}>
+          <MessageTextArea user={this.props.user} selectedChannel={this.props.selectedChannel}/>
+            {this.displayChannelMessages()}
 
-          <MessageTextArea />
-        </div>
-        <div className="profile-container">
-          <Profile />
-        </div>
-      </div>
+          </Grid>
+        {/* </div> */}
+        {/* <div className="profile-container"> */}
+        <Grid item xs={3}>
+        <Profile />
+        </Grid>
+        {/* </div> */}
+    </Grid>
+      //</div>
     );
   }
 }

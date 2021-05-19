@@ -1,14 +1,20 @@
 import React from "react";
 import { connect } from "react-redux";
+import { IconButton, Card, CardHeader, Avatar, TextField, Typography, CardContent } from "@material-ui/core";
+
 
 class Profile extends React.Component {
   render() {
     return (
-      <div className="Profile-area">
-        <div className="profile-name">
-          {this.props.user.firstName + " " + this.props.user.lastName}
-        </div>
-        <div className="profile-name">{this.props.user.displayName}</div>
+      <Card className="profile-area">
+        <CardHeader 
+          className="profile-name" 
+          title={
+          <Typography variant="h5" className="message-title">
+            {this.props.user.firstName + " " + this.props.user.lastName}
+          </Typography>}
+          subheader={<Typography className="profile-name">{this.props.user.displayName}</Typography>}>
+        </CardHeader>
         <div className="profile-image">
           <img
             alt="user avatar"
@@ -16,13 +22,10 @@ class Profile extends React.Component {
             src={this.props.user.photoURL}
           />
         </div>
-        <div className="profile-field-name"> Email</div>
-        <div className="profile-field-value">{this.props.user.email}</div>
-        <div className="profile-field-name">Website</div>
-        <div className="profile-field-value">{this.props.user.website}</div>
-        <div className="profile-field-name"> Bio</div>
-        <div className="profile-field-value">{this.props.user.bio}</div>
-      </div>
+        <CardContent className="profile-field-value">{this.props.user.email}</CardContent>
+        <CardContent className="profile-field-value">{this.props.user.website}</CardContent>
+        <CardContent className="profile-field-value">{this.props.user.bio}</CardContent>
+      </Card>
     );
   }
 }

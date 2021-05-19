@@ -14,8 +14,18 @@ body {
 .custom-button {
   cursor: pointer;
 }
+#remember-me {
+  display: block;
+}
 
-.signup-container {
+#login-button {
+  min-width: 60%;
+  min-height: 50px;
+  display: inline-block;
+  margin: 0 auto 2% auto;
+  margin-left: 20%;
+}
+/* .signup-container {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -24,14 +34,19 @@ body {
   width: 50%;
   margin: auto;
   background-color: white;
-}
-.signup-form-container{
+} */
+/* .signup-form-container{
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   height: 100;
   margin: auto;
+} */
+
+.google-button {
+  margin: 0 auto 3% auto;
+  display: inline;
 }
 
 .signup-label {
@@ -52,7 +67,7 @@ body {
 }
 
 
-.app-container {
+/* .app-container {
   display: flex;
   flex-direction: column;
   align-items: stretch;
@@ -60,16 +75,16 @@ body {
   width: 80%;
   margin: auto;
   background-color: white;
-}
+} */
 
-.home-container {
+/* .home-container {
   display: grid;
   grid-template-columns: 20% 50% 30%;
   height: 100%;
   width: 100%;
   margin: auto;
   margin-top: 20px;
-}
+} */
 
 .nav-container {
   display: flex;
@@ -94,9 +109,11 @@ body {
 .message-card {
   position: relative;
   width: 90%;
-  min-height: 20%;
+  min-height: 10%;
   max-height: 50%;
   margin: 2% auto;
+  padding-bottom: 2%;
+  padding-left: 2%;
 }
 
 .message-title {
@@ -108,10 +125,16 @@ body {
     margin: 0;
 }
 
+#post-button {
+  margin: 4% 3%;
+}
+
 .comment-box {
-    width: 80%;
-    margin: 2% 1% 2% 2%;
-   
+    width: 80%;   
+}
+
+.channel-display {
+  margin: 3% 0;
 }
 
 .post-button {
@@ -140,6 +163,9 @@ body {
   background-color: red;
 }
 
+.profile-area {
+  margin: 3% 0;
+}
 .profile-name {
     text-align: center;
     margin: 5%;
@@ -168,9 +194,9 @@ body {
     text-align: center;
 }
 
-.message-input-box {
+/* .message-input-box {
     position: fixed;
     bottom: 0;
     height: 12%;
     width: 39.8%;
-}
+} */

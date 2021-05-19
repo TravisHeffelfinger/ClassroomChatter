@@ -11,14 +11,14 @@ import LandingPage from "../pages/LandingPage";
 import SignUpPage from "../pages/SignUpPage";
 import NavBar from "../components/NavBar";
 import { updateChannels, updateMessages } from "../actions";
-import { Paper } from "@material-ui/core";
+import { Container } from "@material-ui/core";
 import Edit from './Edit'
 
 class App extends React.Component {
   render() {
     return (
       <Router>
-        <Paper className="app-container">
+        <Container className="app-container">
           {this.props.authenticated && <NavBar />}
 
           {this.props.authenticated ? (
@@ -34,7 +34,7 @@ class App extends React.Component {
               <Route exact path="/signup" component={SignUpPage} />
             </Switch>
           )}
-        </Paper>
+        </Container>
       </Router>
     );
   }

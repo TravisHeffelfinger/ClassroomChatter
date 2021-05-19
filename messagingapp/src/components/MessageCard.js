@@ -20,7 +20,7 @@ const MessageCard = (props) => {
       response.forEach((comment) => {
         comments.push({ ...comment.data(), docId: comment.id });
       });
-      dispatch(addComment(comments));
+      if(comments !== []) dispatch(addComment(comments));
     });
   }, []);
 
@@ -73,7 +73,7 @@ const MessageCard = (props) => {
       <CardHeader
         avatar={<Avatar src={props.userImg} />}
         title={
-          <Typography variant="h5" className="message-title">
+          <Typography variant="h6" className="message-title">
             {props.username}
           </Typography>
         }
@@ -86,11 +86,11 @@ const MessageCard = (props) => {
       </CardContent>
         <TextField
           placeholder="Post a comment!"
-          id="outlined-multiline-static"
+          //id="outlined-multiline-static"
           label="Post a comment!"
           multiline
           fullwidth="true"
-          rows={2}
+          rows={1}
           value={comment}
           variant="outlined"
           onChange={(e) => setComment(e.target.value)}
