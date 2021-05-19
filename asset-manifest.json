@@ -1,22 +1,22 @@
 {
   "files": {
-    "main.css": "/ReactModuleProject/static/css/main.f65389f1.chunk.css",
-    "main.js": "/ReactModuleProject/static/js/main.89321b30.chunk.js",
-    "main.js.map": "/ReactModuleProject/static/js/main.89321b30.chunk.js.map",
-    "runtime-main.js": "/ReactModuleProject/static/js/runtime-main.bf80f2c2.js",
-    "runtime-main.js.map": "/ReactModuleProject/static/js/runtime-main.bf80f2c2.js.map",
-    "static/js/2.93ec0a7d.chunk.js": "/ReactModuleProject/static/js/2.93ec0a7d.chunk.js",
-    "static/js/2.93ec0a7d.chunk.js.map": "/ReactModuleProject/static/js/2.93ec0a7d.chunk.js.map",
-    "index.html": "/ReactModuleProject/index.html",
-    "precache-manifest.ed93381cef4eb6366165366564d23ddf.js": "/ReactModuleProject/precache-manifest.ed93381cef4eb6366165366564d23ddf.js",
-    "service-worker.js": "/ReactModuleProject/service-worker.js",
-    "static/css/main.f65389f1.chunk.css.map": "/ReactModuleProject/static/css/main.f65389f1.chunk.css.map",
-    "static/js/2.93ec0a7d.chunk.js.LICENSE.txt": "/ReactModuleProject/static/js/2.93ec0a7d.chunk.js.LICENSE.txt"
+    "main.css": "/travisheffelfinger.github.io/ReactModuleProject/static/css/main.e8bedff0.chunk.css",
+    "main.js": "/travisheffelfinger.github.io/ReactModuleProject/static/js/main.276ee6ca.chunk.js",
+    "main.js.map": "/travisheffelfinger.github.io/ReactModuleProject/static/js/main.276ee6ca.chunk.js.map",
+    "runtime-main.js": "/travisheffelfinger.github.io/ReactModuleProject/static/js/runtime-main.a955982c.js",
+    "runtime-main.js.map": "/travisheffelfinger.github.io/ReactModuleProject/static/js/runtime-main.a955982c.js.map",
+    "static/js/2.9556d7f1.chunk.js": "/travisheffelfinger.github.io/ReactModuleProject/static/js/2.9556d7f1.chunk.js",
+    "static/js/2.9556d7f1.chunk.js.map": "/travisheffelfinger.github.io/ReactModuleProject/static/js/2.9556d7f1.chunk.js.map",
+    "index.html": "/travisheffelfinger.github.io/ReactModuleProject/index.html",
+    "precache-manifest.0e500aa789992f9fc60c5fedabc7d617.js": "/travisheffelfinger.github.io/ReactModuleProject/precache-manifest.0e500aa789992f9fc60c5fedabc7d617.js",
+    "service-worker.js": "/travisheffelfinger.github.io/ReactModuleProject/service-worker.js",
+    "static/css/main.e8bedff0.chunk.css.map": "/travisheffelfinger.github.io/ReactModuleProject/static/css/main.e8bedff0.chunk.css.map",
+    "static/js/2.9556d7f1.chunk.js.LICENSE.txt": "/travisheffelfinger.github.io/ReactModuleProject/static/js/2.9556d7f1.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
-    "static/js/runtime-main.bf80f2c2.js",
-    "static/js/2.93ec0a7d.chunk.js",
-    "static/css/main.f65389f1.chunk.css",
-    "static/js/main.89321b30.chunk.js"
+    "static/js/runtime-main.a955982c.js",
+    "static/js/2.9556d7f1.chunk.js",
+    "static/css/main.e8bedff0.chunk.css",
+    "static/js/main.276ee6ca.chunk.js"
   ]
 }
