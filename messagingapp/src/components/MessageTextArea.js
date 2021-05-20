@@ -3,7 +3,7 @@ import { useState } from 'react'
 import { useDispatch, useStore } from 'react-redux'
 import { Avatar, Button, Card, CardContent, CardHeader, TextField, Typography } from "@material-ui/core";
 import { addMessage, getMessages,  } from '../helpers/db'
-import { updateMessages } from '../actions'
+import { updateMessages } from '../Redux/actions'
 
 const MessageTextArea = (props) => {
     const [message, setMessage] = useState('')

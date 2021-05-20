@@ -3,7 +3,7 @@ import { signUpUser } from "../helpers/db";
 import { signUpWithEmail } from "../helpers/auth";
 import { firebased } from "../services/firebase";
 import { Link, Redirect } from "react-router-dom";
-import { authenticateUser, getUser } from "../actions";
+import { authenticateUser, getUser } from "../Redux/actions";
 import { connect } from "react-redux";
 import {
   Button,

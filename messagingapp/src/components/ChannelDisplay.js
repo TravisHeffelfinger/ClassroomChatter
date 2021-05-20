@@ -1,7 +1,7 @@
 import { Button, CardHeader, IconButton, Card, TextField, Typography } from "@material-ui/core";
 import React, { useState, useEffect } from "react";
 import { useDispatch, useStore } from "react-redux";
-import { channelChange, updateChannels } from "../actions";
+import { channelChange, updateChannels } from "../Redux/actions";
 import { getChannels, addChannel } from "../helpers/db";
 
 const ChannelDisplay = () => {
@@ -29,7 +29,9 @@ const ChannelDisplay = () => {
 
   const handleAddChannel = (event) => {
     event.preventDefault();
-    addChannel({ name: channel, uid: store.getState().user.uid }); // TODO: implement proper messaging
+    setChannelButton(false);
+    console.log('adding channel')
+    addChannel({ name: channel, uid: store.getState().user.userId }); // TODO: implement proper messaging
     getChannels().then((response) => {
       let channels = [];
       response.forEach((channel) => {
@@ -123,7 +125,6 @@ const ChannelDisplay = () => {
             {channel.name}
           </Button>
         } else if (channel.creatorId === store.getState().user.userId && ownChannelSelect === channel.docId) {
-          console.log('ding')
           result = <> <Button
             key={channel.docId}
             variant="contained"

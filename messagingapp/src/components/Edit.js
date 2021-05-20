@@ -2,9 +2,8 @@ import { Button, Grid, TextField } from "@material-ui/core";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useStore } from "react-redux";
 import firebase from "firebase";
-import { getUserData, updateUser } from "../helpers/db";
+import {  updateUser } from "../helpers/db";
 import { Redirect } from "react-router-dom";
-import {getUser} from '../actions'
 const Edit = (props) => {
     
   const dispatch = useDispatch();
@@ -19,12 +18,12 @@ const Edit = (props) => {
   const [bio, setBio] = useState(store.getState().user.bio);
   const [updated, setUpdated] = useState(false);
   useEffect(() => {
-    let userData;
+    //let userData;
     let userResponse;
     async function getUserInfo() {
       userResponse = await firebase.auth().currentUser;
       console.log(userResponse)
-      userData = await getUserData(userResponse.uid);
+      // userData = await getUserData(userResponse.uid);
     }
     getUserInfo();
   }, []);

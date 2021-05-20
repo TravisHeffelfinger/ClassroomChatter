@@ -1,4 +1,4 @@
-import  types from '../helpers/types';
+import  types from '../../helpers/types';
 
 export const getUser = user => {
     return {
@@ -66,7 +66,7 @@ export const getMessages = messages => {
     return {
         type: types.GET_MESSAGES,
         payload: {
-            ...messages
+            messages
         }
     }
 }
@@ -75,7 +75,7 @@ export const addComment = comments => {
     return{
         type: types.ADD_COMMENT,
         payload: {
-            ...comments
+            comments
         }
     }
 }

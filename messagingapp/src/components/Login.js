@@ -17,7 +17,7 @@ import Container from "@material-ui/core/Container";
 import GoogleButton from "react-google-button";
 
 import { loginWithEmail, signInWithGoogle } from "../helpers/auth";
-import { authenticateUser, getUser } from "../actions";
+import { authenticateUser, getUser } from "../Redux/actions";
 import { getUserData } from "../helpers/db";
 
 function Copyright() {
@@ -98,7 +98,7 @@ function LoginPage() {
         <Avatar className={classes.avatar}>
           <LockOutlinedIcon />
         </Avatar>
-        <Typography component="h1" variant="h5">
+        <Typography component="h1" variant="h5" >
           Sign in
         </Typography>
         <form className={classes.form} noValidate onSubmit={handleEmailSignIn}>
@@ -110,7 +110,7 @@ function LoginPage() {
             error={error}
             helperText={error ? 'Invalid email or password': ''}
             id="email"
-            label="Email Address"
+            label="Email address"
             name="email"
             autoComplete="email"
             autoFocus

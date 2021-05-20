@@ -1,18 +1,12 @@
 import React from "react";
-import {
-  HashRouter as Router,
-  Route,
-  Switch,
-} from "react-router-dom";
+import { HashRouter as Router } from "react-router-dom";
 import { connect } from "react-redux";
 
-import Home from "../pages/Home";
-import LandingPage from "../pages/LandingPage";
-import SignUpPage from "../pages/SignUpPage";
 import NavBar from "../components/NavBar";
-import { updateChannels, updateMessages } from "../actions";
+import { updateChannels, updateMessages } from "../Redux/actions";
 import { Container } from "@material-ui/core";
-import Edit from './Edit'
+import PrivateSwitch from "./PrivateSwitch";
+import PublicSwitch from "./PublicSwitch";
 
 class App extends React.Component {
   render() {
@@ -20,20 +14,7 @@ class App extends React.Component {
       <Router>
         <Container className="app-container">
           {this.props.authenticated && <NavBar />}
-
-          {this.props.authenticated ? (
-            <Switch>
-              <Route exact path="/" component={Home} />
-              <Route path="/edit" component={Edit} />
-              <Route component={Home} />
-            </Switch>
-          ) : (
-            <Switch>
-              <Route exact path="/" component={LandingPage} />
-              <Route exact path="/login" component={LandingPage} />
-              <Route exact path="/signup" component={SignUpPage} />
-            </Switch>
-          )}
+          {this.props.authenticated ? <PrivateSwitch /> : <PublicSwitch />}
         </Container>
       </Router>
     );

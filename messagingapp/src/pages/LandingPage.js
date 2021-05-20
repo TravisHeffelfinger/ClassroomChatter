@@ -1,6 +1,6 @@
 import React from 'react'
 
-import Login from '../styles/testlogin'
+import Login from '../components/Login'
 
 class LandingPage extends React.Component {
 

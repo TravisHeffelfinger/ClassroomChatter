@@ -1,5 +1,5 @@
 import { combineReducers } from "redux";
-import types from "../helpers/types";
+import types from "../../helpers/types";
 
 let defaultUser = {
   bio: "I am the first test of Signup",

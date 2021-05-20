@@ -1,9 +1,9 @@
-import { Button, Paper, AppBar, Toolbar } from '@material-ui/core';
+import { Button, AppBar, Toolbar } from '@material-ui/core';
 import React from 'react'
 import { useDispatch } from 'react-redux';
 import { NavLink } from 'react-router-dom'
 import { firebased } from '../services/firebase'
-import { disconnectUser } from '../actions'
+import { disconnectUser } from '../Redux/actions'
 
 function NavBar() {
     const dispatch = useDispatch();
@@ -16,12 +16,12 @@ function NavBar() {
     return (
       <AppBar position="static">
         <Toolbar className="nav-container">
-          <NavLink to="/edit">
+          <NavLink to="/edit" style={{textDecoration: 'none'}}>
             <Button className="nav-link-button" variant="text">
-              Edit Profile
+              Profile
             </Button>
           </NavLink>
-          <NavLink to="/">
+          <NavLink to="/" style={{textDecoration: 'none'}}>
             <Button
               className="nav-link-button"
               variant="text"

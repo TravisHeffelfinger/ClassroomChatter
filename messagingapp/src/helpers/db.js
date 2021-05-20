@@ -12,11 +12,10 @@ export function getUserData(userId) {
     const userPromise = new Promise((resolve, reject) => {
         return db.collection("users").where("uid", "==", userId).get().then((query) => {
           query.forEach((user) => {
-              console.log('this is from db getUserData',user.id)
             resolve({ ...user.data(), docId: user.id });
           });
         },
-          (rej) => {console.log('This is from the userPromise', userId)});
+          (rej) => {});
     })
     return userPromise
 }
@@ -27,7 +26,6 @@ export function updateUser(user, newFields) {
     .update({ ...newFields })
     .then(() => {
     }, rej => {
-        console.log(rej)
     });
 }
 
@@ -98,7 +96,6 @@ export function addMessage(messageObject, channelRef, userRef) {
       dateCreated: new Date(),
     })
     .then(() => {
-      console.log("new message created");
     })
     .catch((error) => {
       console.log("failure", error);

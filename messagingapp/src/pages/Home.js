@@ -1,7 +1,7 @@
-import { Container, Grid } from "@material-ui/core";
+import { Grid } from "@material-ui/core";
 import React from "react";
 import { connect } from "react-redux";
-import { updateChannels, updateMessages } from "../actions";
+import { updateChannels, updateMessages } from "../Redux/actions";
 import ChannelDisplay from "../components/ChannelDisplay";
 import MessageCard from "../components/MessageCard";
 import MessageTextArea from "../components/MessageTextArea";
@@ -31,8 +31,9 @@ class Home extends React.Component {
     const { selectedChannel, posts } = this.props;
     const { messages } = posts;
     const result = messages.map((message, index) => {
+      let result;
       if (message.channelId === selectedChannel.docId)
-        return (
+        result = (
           <MessageCard
             channelId={selectedChannel.docId}
             key={index}
@@ -42,33 +43,29 @@ class Home extends React.Component {
             docId={message.docId}
           />
         );
+
+      return result;
     });
     return result;
   };
 
   render() {
     return (
-      //<div className="home-container">
-      <Grid container direction="row" justify="center" >
-          <Grid item xs={3} >
-        {/* <div className="channel-container"> */}
-          <ChannelDisplay />
-        {/* </div> */}
-        </Grid>
-        {/* <div className="message-container"> */}
-          <Grid item xs={6}>
-          <MessageTextArea user={this.props.user} selectedChannel={this.props.selectedChannel}/>
-            {this.displayChannelMessages()}
-
-          </Grid>
-        {/* </div> */}
-        {/* <div className="profile-container"> */}
+      <Grid container direction="row" justify="center">
         <Grid item xs={3}>
-        <Profile />
+          <ChannelDisplay />
         </Grid>
-        {/* </div> */}
-    </Grid>
-      //</div>
+        <Grid item xs={6}>
+          <MessageTextArea
+            user={this.props.user}
+            selectedChannel={this.props.selectedChannel}
+          />
+          {this.displayChannelMessages()}
+        </Grid>
+        <Grid item xs={3}>
+          <Profile />
+        </Grid>
+      </Grid>
     );
   }
 }
