@@ -66,7 +66,6 @@ function LoginPage() {
   async function handleEmailSignIn(event) {
     event.preventDefault();
     let userResponse = await loginWithEmail(email, password);
-    console.log('made it this far')
     try {
         getUserData(userResponse.user.uid).then(
       (resolve) => {

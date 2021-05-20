@@ -48,7 +48,7 @@ body {
   margin: 0 auto 3% auto;
   display: inline;
 }
-
+/* 
 .signup-label {
   margin-top: 1%;
 }
@@ -57,14 +57,13 @@ body {
 }
 
 .signup-input {
-  margin-bottom: 1%;
 }
 
 .signup-label,
 .signup-input,
 .signup-button {
   display: block;
-}
+} */
 
 
 /* .app-container {

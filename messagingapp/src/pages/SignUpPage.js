@@ -5,28 +5,35 @@ import { firebased } from "../services/firebase";
 import { Link, Redirect } from "react-router-dom";
 import { authenticateUser, getUser } from "../actions";
 import { connect } from "react-redux";
-import { Button, InputLabel, TextField, Typography, Grid} from "@material-ui/core";
+import {
+  Button,
+  InputLabel,
+  TextField,
+  Typography,
+  Grid,
+  Container,
+  Link as MUILink,
+} from "@material-ui/core";
 
 class SignUpPage extends React.Component {
   state = {
     authenticated: false,
     disabled: true,
-    firstName: '',
-    lastName: '',
-    displayName: '',
-    email: '',
-    password: '',
-    website: '',
-    bio: ''
-  }
-
+    firstName: "",
+    lastName: "",
+    displayName: "",
+    email: "",
+    password: "",
+    website: "",
+    bio: "",
+  };
 
   handleChange = (event) => {
-        this.setState({ [event.target.name]: event.target.value });
-        if (this.state.email && this.state.password && this.state.displayName) {
-            this.setState({disabled: false})
-        } 
+    this.setState({ [event.target.name]: event.target.value });
+    if (this.state.email && this.state.password && this.state.displayName) {
+      this.setState({ disabled: false });
     }
+  };
 
   handleSignUp = async (event) => {
     event.preventDefault();
@@ -56,100 +63,130 @@ class SignUpPage extends React.Component {
     } else {
       console.log("non valid email or password");
     }
-  }
+  };
 
   render() {
     if (this.state.authenticated) {
       return <Redirect to="/" />;
     }
     return (
-      <Grid container className="signup-container">
-        <Typography variant="h3">Welcome to Classroom Chatter!</Typography>
-        <Grid item xs={8} className="signup-form-container">
-          <form>
-            <div>
+      <Container
+        component="div"
+        maxWidth="md" 
+      >
+        <Grid container
+            spacing={2}
+            justify="center"
+            direction="column"
+            alignItems="center">
+          
+        <Grid item>
+        <Typography variant="h4">Welcome to Classroom Chatter!</Typography>
+        </Grid>
+        <Grid item>
+        <form>
+          <Grid
+            container
+            spacing={2}
+            direction="column"
+            justify="center"
+            alignItems="center"
+          >
+            <Grid item>
               <TextField
                 value={this.state.email}
                 label="Email"
                 autoFocus={true}
+                fullWidth={true}
                 required={true}
                 className="signup-input"
                 id="email"
                 name="email"
                 type="text"
+                variant="outlined"
                 onChange={this.handleChange}
               />
-            </div>
-            <div>
+            </Grid>
+            <Grid item>
               <TextField
                 value={this.state.password}
                 required={true}
+                variant="outlined"
                 label="Password"
+                fullWidth={true}
                 className="signup-input"
                 id="password"
-                helperText="Must be at least 6 characters"
                 name="password"
                 type="password"
                 onChange={this.handleChange}
               />
-            </div>
-            <div>
+             </Grid>
+             <Grid item>
               <TextField
                 value={this.state.displayName}
                 required={true}
                 label="Username"
+                variant="outlined"
+                fullWidth={true}
                 className="signup-input"
                 id="displayName"
                 name="displayName"
                 type="text"
                 onChange={this.handleChange}
               />
-            </div>
-            <div>
+               </Grid>
+               <Grid item>
               <TextField
                 value={this.state.firstName}
                 className="signup-input"
                 label="First Name"
+                variant="outlined"
                 id="firstName"
                 name="firstName"
+                fullWidth={true}
                 type="text"
                 onChange={this.handleChange}
               />
-            </div>
-            <div>
+             </Grid>
+             <Grid item>
               <TextField
                 value={this.state.lastName}
                 className="signup-input"
                 id="lastName"
+                variant="outlined"
                 name="lastName"
                 label="Last Name"
+                fullWidth={true}
                 type="text"
                 onChange={this.handleChange}
               />
-            </div>
-            <div>
+               </Grid>
+               <Grid item>
               <TextField
                 value={this.state.website}
                 className="signup-input"
+                variant="outlined"
                 id="website"
                 name="website"
+                fullWidth={true}
                 label="Website"
                 type="text"
                 onChange={this.handleChange}
               />
-            </div>
-            <div>
+               </Grid>
+               <Grid item>
               <TextField
                 value={this.state.bio}
                 className="signup-input"
+                variant="outlined"
                 id="bio"
                 name="bio"
+                fullWidth={true}
                 type="text"
                 label="Bio"
                 onChange={this.handleChange}
               />
-            </div>
-            <div className="signup-button">
+                 </Grid>
               <Button
                 variant="contained"
                 type="submit"
@@ -159,18 +196,20 @@ class SignUpPage extends React.Component {
               >
                 Create Account
               </Button>
-            </div>
+            
             <InputLabel className="signup-label">
-              Already have an account?
-            </InputLabel>{" "}
-            <Link to="/login">sign in</Link>
-          </form>
+              <MUILink variant="body2" underline="none">
+                <Link style={{textDecoration: 'none'}} to="/login"> Already have an account? sign in</Link>
+              </MUILink>
+            </InputLabel>
+          </Grid>
+        </form>
         </Grid>
-      </Grid>
+        </Grid>
+      </Container>
     );
   }
 }
-
 
 const mapStateToProps = (state) => ({
   authenticated: state.auth.authenticated,

@@ -16,13 +16,13 @@ const MessageCard = (props) => {
   const store = useStore();
   useEffect(() => {
     getComments().then((response) => {
+      if(store.getState().posts.comments !== []){
       const comments = [];
       response.forEach((comment) => {
         comments.push({ ...comment.data(), docId: comment.id });
       });
-      if(comments !== []) dispatch(addComment(comments));
-    });
-  }, []);
+      dispatch(addComment(comments));
+    }})});
 
   const handleComment = async () => {
     let comments = [];

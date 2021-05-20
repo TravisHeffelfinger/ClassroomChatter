@@ -75,7 +75,7 @@ export const addComment = comments => {
     return{
         type: types.ADD_COMMENT,
         payload: {
-            comments
+            ...comments
         }
     }
 }

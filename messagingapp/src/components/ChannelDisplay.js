@@ -112,7 +112,7 @@ const ChannelDisplay = () => {
       })}
       <CardHeader title={<Typography variant="h6" display="inline">Your Channels</Typography>}/>
       {store.getState().channels.allChannels.map((channel) => {
-        let result = {};
+        let result = [];
          if(channel.creatorId === store.getState().user.userId) {
           result = <Button
             key={channel.docId}
