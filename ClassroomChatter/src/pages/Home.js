@@ -5,7 +5,7 @@ import { updateChannels, updateMessages } from "../Redux/actions";
 import ChannelDisplay from "../components/ChannelDisplay";
 import MessageCard from "../components/MessageCard";
 import MessageTextArea from "../components/MessageTextArea";
-import { getMessages, getChannels } from "../helpers/db";
+import { getMessages } from "../helpers/db";
 import Profile from "./Profile";
 
 class Home extends React.Component {
@@ -16,14 +16,6 @@ class Home extends React.Component {
         messages.push({ ...message.data(), docId: message.id });
       });
       this.props.updateMessages(messages);
-    });
-
-    getChannels().then((response) => {
-      const channels = [];
-      response.forEach((channel) => {
-        channels.push({ ...channel.data(), docId: channel.id });
-      });
-      this.props.updateChannels(channels);
     });
   }
 

@@ -26,13 +26,13 @@ const MessageCard = (props) => {
   const dispatch = useDispatch();
   const store = useStore();
   useEffect(() => {
-      getComments().then((response) => {
-        const comments = [];
-        response.forEach((comment) => {
-          comments.push({ ...comment.data(), docId: comment.id });
-        });
-        dispatch(addComment(comments));
+    getComments().then((response) => {
+      const comments = [];
+      response.forEach((comment) => {
+        comments.push({ ...comment.data(), docId: comment.id });
       });
+      dispatch(addComment(comments));
+    });
   });
 
   const handleComment = async () => {
@@ -89,13 +89,12 @@ const MessageCard = (props) => {
         }
       />
       <CardContent>
-        <Typography variant="body1" className="message-body">
+        <Typography variant="body2" className="message-body">
           {props.messageBody}
         </Typography>
         {displayComments()}
       </CardContent>
       <TextField
-        placeholder="Post a comment!"
         label="Post a comment!"
         multiline
         fullwidth="true"

@@ -1,4 +1,11 @@
-import { Button, CardHeader, IconButton, Card, TextField, Typography } from "@material-ui/core";
+import {
+  Button,
+  CardHeader,
+  IconButton,
+  Card,
+  TextField,
+  Typography,
+} from "@material-ui/core";
 import React, { useState, useEffect } from "react";
 import { useDispatch, useStore } from "react-redux";
 import { channelChange, updateChannels } from "../Redux/actions";
@@ -30,7 +37,7 @@ const ChannelDisplay = () => {
   const handleAddChannel = (event) => {
     event.preventDefault();
     setChannelButton(false);
-    console.log('adding channel')
+    console.log("adding channel");
     addChannel({ name: channel, uid: store.getState().user.userId }); // TODO: implement proper messaging
     getChannels().then((response) => {
       let channels = [];
@@ -43,55 +50,54 @@ const ChannelDisplay = () => {
   };
 
   const handleChannelNameChange = (event) => {
-    console.log('changed name of channel to')
-  }
+    console.log("changed name of channel to");
+  };
   const handleChannelDelete = (event) => {
-    console.log('deleted Channel')
-  }
+    console.log("deleted Channel");
+  };
   return (
     <Card className="channel-display">
-      <CardHeader className="channel-header"
-       title={<Typography variant="h6" display="inline">
-          All Channels <IconButton
-          className="create-channel-button custom-button"
-          onClick={() => setChannelButton(!newChannelButton)}
-        >
-          +
-        </IconButton>
-        </Typography>}/>
-   
-        
-        {newChannelButton && (
-          <form>
-            <TextField
-              variant="standard"
-              type="text"
-              fullWidth="true"
-              onChange={(e) => setChannel(e.target.value)}
-              label="Enter channel name..."
-              value={channel}
-            />
-            <Button
-              color="primary"
-              size="medium"
-              type="submit"
-              onClick={handleAddChannel}
-            >
-              Add Channel
-            </Button>
-            <Button
-              color="secondary"
-              size="medium"
-              type="submit"
-              onClick={() => setChannelButton(false)}
-            >
-              Cancel
-            </Button>
-          </form>
-        )}
+      <CardHeader
+        className="channel-header"
+        title={
+          <Typography variant="h6" display="inline">
+            All Channels
+          </Typography>
+        }
+      />
+
+      {newChannelButton && (
+        <form>
+          <TextField
+            variant="standard"
+            type="text"
+            fullWidth="true"
+            onChange={(e) => setChannel(e.target.value)}
+            label="Enter channel name..."
+            value={channel}
+          />
+          <Button
+            color="primary"
+            size="medium"
+            type="submit"
+            onClick={handleAddChannel}
+          >
+            Add Channel
+          </Button>
+          <Button
+            color="secondary"
+            size="medium"
+            type="submit"
+            onClick={() => setChannelButton(false)}
+          >
+            Cancel
+          </Button>
+        </form>
+      )}
 
       {store.getState().channels.allChannels.map((channel) => {
-        return (channel.docId === store.getState().channels.selectedChannel.docId) ? (
+        return channel.docId ===
+          store.getState().channels.selectedChannel.docId ? (
           <Button
             key={channel.docId}
             variant="contained"
@@ -112,32 +118,67 @@ const ChannelDisplay = () => {
           </Button>
         );
       })}
-      <CardHeader title={<Typography variant="h6" display="inline">Your Channels</Typography>}/>
+      <CardHeader
+        title={
+          <Typography variant="h6" display="inline">
+            Your Channels{" "}
+            <IconButton
+              className="create-channel-button custom-button"
+              onClick={() => setChannelButton(!newChannelButton)}
+            >
+              +
+            </IconButton>
+          </Typography>
+        }
+      />
       {store.getState().channels.allChannels.map((channel) => {
         let result = [];
-         if(channel.creatorId === store.getState().user.userId) {
-          result = <Button
-            key={channel.docId}
-            variant="text"
-            fullWidth={true}
-            onClick={() => setOwnChannelSelect(channel.docId)}
-          >
-            {channel.name}
-          </Button>
-        } else if (channel.creatorId === store.getState().user.userId && ownChannelSelect === channel.docId) {
-          result = <> <Button
-            key={channel.docId}
-            variant="contained"
-            fullWidth={true}
-            onClick={() => setOwnChannelSelect('')}
-          >
-            {channel.name}
-          </Button>
-          <Button variant="text" fullWidth={true} onClick={() => handleChannelNameChange} color="primary">Change Name</Button>
-          <Button variant="text" fullWidth={true} onClick={() => handleChannelDelete} color="secondary">Delete</Button></>
+        if (channel.creatorId === store.getState().user.userId) {
+          result = (
+            <Button
+              key={channel.docId}
+              variant="text"
+              fullWidth={true}
+              onClick={() => setOwnChannelSelect(channel.docId)}
+            >
+              {channel.name}
+            </Button>
+          );
+        } else if (
+          channel.creatorId === store.getState().user.userId &&
+          ownChannelSelect === channel.docId
+        ) {
+          result = (
+            <>
+              {" "}
+              <Button
+                key={channel.docId}
+                variant="contained"
+                fullWidth={true}
+                onClick={() => setOwnChannelSelect("")}
+              >
+                {channel.name}
+              </Button>
+              <Button
+                variant="text"
+                fullWidth={true}
+                onClick={() => handleChannelNameChange}
+                color="primary"
+              >
+                Change Name
+              </Button>
+              <Button
+                variant="text"
+                fullWidth={true}
+                onClick={() => handleChannelDelete}
+                color="secondary"
+              >
+                Delete
+              </Button>
+            </>
+          );
         }
-        return result
-
+        return result;
       })}
     </Card>
   );
