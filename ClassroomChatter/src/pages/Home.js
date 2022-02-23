@@ -1,4 +1,4 @@
-import { Grid } from "@material-ui/core";
+import { Container, Grid } from "@material-ui/core";
 import React from "react";
 import { connect } from "react-redux";
 import { updateChannels, updateMessages } from "../Redux/actions";
@@ -43,6 +43,7 @@ class Home extends React.Component {
 
   render() {
     return (
+      <Container>
       <Grid container direction="row" justify="center">
         <Grid item xs={3}>
           <ChannelDisplay />
@@ -58,6 +59,7 @@ class Home extends React.Component {
           <Profile />
         </Grid>
       </Grid>
+      </Container>
     );
   }
 }

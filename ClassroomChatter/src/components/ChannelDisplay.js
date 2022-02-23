@@ -37,16 +37,20 @@ const ChannelDisplay = () => {
   const handleAddChannel = (event) => {
     event.preventDefault();
     setChannelButton(false);
-    console.log("adding channel");
-    addChannel({ name: channel, uid: store.getState().user.userId }); // TODO: implement proper messaging
-    getChannels().then((response) => {
-      let channels = [];
-      response.forEach((channel) => {
-        channels.push({ ...channel.data(), docId: channel.id });
-      });
+    let channels = store.getState().channels.allChannels;
+    console.log("before: ",channels);
+    addChannel({ name: channel, uid: store.getState().user.userId }).then(result => {
+      channels.push(result);
+      console.log("after: ",result)
       dispatch(updateChannels(channels));
-    });
     setChannel("");
+    })
+    // getChannels().then((response) => {
+    //   let channels = [];
+    //   response.forEach((channel) => {
+    //     channels.push({ ...channel.data(), docId: channel.id });
+    //   });
+  // });
   };
 
   const handleChannelNameChange = (event) => {
@@ -65,35 +69,6 @@ const ChannelDisplay = () => {
           </Typography>
         }
       />
-
-      {newChannelButton && (
-        <form>
-          <TextField
-            variant="standard"
-            type="text"
-            fullWidth="true"
-            onChange={(e) => setChannel(e.target.value)}
-            label="Enter channel name..."
-            value={channel}
-          />
-          <Button
-            color="primary"
-            size="medium"
-            type="submit"
-            onClick={handleAddChannel}
-          >
-            Add Channel
-          </Button>
-          <Button
-            color="secondary"
-            size="medium"
-            type="submit"
-            onClick={() => setChannelButton(false)}
-          >
-            Cancel
-          </Button>
-        </form>
-      )}
 
       {store.getState().channels.allChannels.map((channel) => {
         return channel.docId ===
@@ -131,6 +106,34 @@ const ChannelDisplay = () => {
           </Typography>
         }
       />
+      {newChannelButton && (
+        <form>
+          <TextField
+            variant="standard"
+            type="text"
+            fullWidth
+            onChange={(e) => setChannel(e.target.value)}
+            label="Enter channel name..."
+            value={channel}
+          />
+          <Button
+            color="primary"
+            size="medium"
+            type="submit"
+            onClick={handleAddChannel}
+          >
+            Add Channel
+          </Button>
+          <Button
+            color="secondary"
+            size="medium"
+            type="submit"
+            onClick={() => setChannelButton(false)}
+          >
+            Cancel
+          </Button>
+        </form>
+      )}
       {store.getState().channels.allChannels.map((channel) => {
         let result = [];
         if (channel.creatorId === store.getState().user.userId) {

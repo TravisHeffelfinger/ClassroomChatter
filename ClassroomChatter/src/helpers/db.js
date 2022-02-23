@@ -34,13 +34,16 @@ export function signUpUser(user) {
     ...user, dateCreated: new Date()
   });
 }
-export function addChannel(channel) {
-  return db.collection("channels").add({
+export async function addChannel(channel) {
+
+   return await db.collection("channels").add({
     name: channel.name,
     creatorId: channel.uid,
     dateCreated: new Date(),
     members: [],
     public: true,
+  }).then(result => {
+    return result;
   });
 }
 
@@ -105,3 +108,18 @@ export function addMessage(messageObject, channelRef, userRef) {
 export function addMessageComment(commentObject) {
   db.collection("comments").add({ ...commentObject, dateCreated: new Date() });
 }
+
+const observer = db.collection('channels')
+  .onSnapshot(querySnapshot => {
+    querySnapshot.docChanges().forEach(change => {
+      if (change.type === 'added') {
+        console.log('New channel: ', change.doc.data());
+      }
+      if (change.type === 'modified') {
+        console.log('Modified channel: ', change.doc.data());
+      }
+      if (change.type === 'removed') {
+        console.log('Removed channel: ', change.doc.data());
+      }
+    });
+  });

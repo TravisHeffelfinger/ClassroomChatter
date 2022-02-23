@@ -4,7 +4,6 @@ import { connect } from "react-redux";
 
 import NavBar from "./NavBar";
 import { updateChannels, updateMessages } from "../Redux/actions";
-import { Container } from "@material-ui/core";
 import PrivateSwitch from "./PrivateSwitch";
 import PublicSwitch from "./PublicSwitch";
 
@@ -12,10 +11,8 @@ class App extends React.Component {
   render() {
     return (
       <Router>
-        <Container className="app-container">
           {this.props.authenticated && <NavBar />}
           {this.props.authenticated ? <PrivateSwitch /> : <PublicSwitch />}
-        </Container>
       </Router>
     );
   }

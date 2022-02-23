@@ -130,9 +130,9 @@ class Profile extends React.Component {
                   " " +
                   this.props.user.lastName +
                   "       "}
-                <IconButton onClick={() => this.setEdit()}>
+                {/* <IconButton onClick={() => this.setEdit()}>
                   <Edit />
-                </IconButton>
+                </IconButton> */}
               </Typography>
             }
             subheader={
